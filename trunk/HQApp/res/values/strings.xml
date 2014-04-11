@@ -4,5 +4,34 @@
     <string name="app_name">HQApp</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_search">Search a mobile</string>
+
+    <string-array name="vendor_array">
+        <item>Tất cả</item>
+        <item>Apple</item>
+        <item>Samsung</item>
+        <item>LG</item>
+        <item>Sky</item>
+        <item>HTC</item>
+        <item>Sony</item>
+        <item>Nokia</item>
+    </string-array>
+    
+    <string-array name="price_array">
+        <item>Tất cả</item>
+        <item>Dưới 1 triệu</item>
+        <item>Dưới 2 triệu</item>
+        <item>Dưới 3 triệu</item>
+        <item>Dưới 5 triệu</item>
+        <item>Dưới 8 triệu</item>
+        <item>Dưới 10 triệu</item>
+        <item>Trên 10 triệu</item>
+    </string-array>
+    
+    <string-array name="arrange_array">
+        <item>Giá tăng dần</item>
+        <item>Giá giảm dần</item>
+        <item>Mới nhất</item>
+    </string-array>
 
 </resources>
