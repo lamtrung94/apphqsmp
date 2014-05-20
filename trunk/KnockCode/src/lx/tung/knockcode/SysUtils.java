@@ -111,6 +111,28 @@ public class SysUtils {
 		}
 	}
 	
+	public static Frequency getCurFreq() {
+		String[] files1 = {
+				scaling_cur_freq, cpuinfo_cur_freq
+		};
+		int cpus = 0;
+		while (true) {
+			File f = new File(SysUtils.scaling_min_freq.replace("cpu0", "cpu" + cpus));
+			if (!f.exists()) {
+				break;
+			}
+			cpus++;
+		}
+		for (int i = 0; i < cpus; i++){
+			String[] files = {
+					scaling_cur_freq.replace("cpu0", "cpu" + i), cpuinfo_cur_freq.replace("cpu0", "cpu" + i)
+			};
+			Frequency freq = getXXXFreq(files);
+			System.out.println();
+		}
+		return getXXXFreq(files1);
+	}
+	
 	
 	private static Frequency getXXXFreq(String[] possibleFiles) {
 		for (String file : possibleFiles) {
@@ -311,6 +333,7 @@ public class SysUtils {
 			}
 			int res = p.waitFor();
 			if (res == 0) {
+				Frequency freq = getCurFreq();
 				Log.d("DISABLE CORES", "SUCCESSFUL!");
 				Toast.makeText(ctx, resOkMsg, Toast.LENGTH_LONG).show();
 				return true;
@@ -360,6 +383,7 @@ public class SysUtils {
 //				Toast.makeText(ctx, mex, Toast.LENGTH_LONG).show();
 				Log.d("ENABLE CORES", "SUCCESSFUL!");
 				Toast.makeText(ctx, resOkMsg, Toast.LENGTH_LONG).show();
+				getCurFreq();
 				return true;
 			} else {
 				Toast.makeText(ctx, ctx.getString(resFailedMsg), Toast.LENGTH_LONG).show();

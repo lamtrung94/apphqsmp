@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -232,6 +233,8 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 				isOff = false;
 				setBrightness(mOldBrightness_Sys);
 				setDefaultCPU();
+				Intent i= new Intent(getApplicationContext(), KnockOnService.class);
+		        getApplicationContext().startService(i);
 				finish();
 			} catch (Exception ex) {
 				// TODO Auto-generated catch block

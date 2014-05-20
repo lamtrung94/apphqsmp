@@ -12,13 +12,13 @@ import android.util.Log;
 import android.view.WindowManager;
 
 public class KnockOnService extends Service {
-
+	BroadcastReceiver mReceiver;
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 	    //TODO do something useful
 		boolean screenOn = intent.getBooleanExtra("screen_state", false);
 	    if (!screenOn) {
-	        Log.d("SCREEN", "OFF");
+	        
 	    } else {
 	    	WakeLock wl;
 	    	PowerManager pm;
@@ -30,7 +30,9 @@ public class KnockOnService extends Service {
 	        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	        startActivity(i);
 	        wl.release();
+	        unregisterReceiver(mReceiver);
 	    	Log.d("SCREEN", "ON");
+	    	this.stopSelf();
 	    }
 	    return Service.START_STICKY;
 	}
@@ -47,7 +49,7 @@ public class KnockOnService extends Service {
 	    // REGISTER RECEIVER THAT HANDLES SCREEN ON AND SCREEN OFF LOGIC
 	    IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
 	    filter.addAction(Intent.ACTION_SCREEN_OFF);
-	    BroadcastReceiver mReceiver = new ScreenReceiver();
+	    mReceiver = new ScreenReceiver();
 	    registerReceiver(mReceiver, filter);
 	    Log.d("KnockOnService", "ONCREATE");
 	}
