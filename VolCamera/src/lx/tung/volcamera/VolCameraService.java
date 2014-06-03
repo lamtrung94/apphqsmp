@@ -1,6 +1,7 @@
 package lx.tung.volcamera;
 
 import android.app.KeyguardManager;
+import android.app.Notification;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -29,19 +30,22 @@ public class VolCameraService extends Service{
 	
 	MediaPlayer mediaPlayer;
 	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
-		screenOff = intent.getBooleanExtra("screen_state", false);
-		volumeDown = intent.getBooleanExtra("volume_clicked", false);
+	public int onStartCommand(Intent intent, int flags, int startId) {		
+		boolean isVolClicked = intent.getBooleanExtra("fromVolClicked", false);
+		boolean isScreenChanged = intent.getBooleanExtra("fromScreenState", false);
+		if(isVolClicked && !isScreenChanged){
+			//screenOff = intent.getBooleanExtra("screen_state", false);
+			volumeDown = intent.getBooleanExtra("volume_clicked", false);
+		}else if (isScreenChanged && !isVolClicked){
+			screenOff = intent.getBooleanExtra("screen_state", false);
+			volumeDown = false;
+		}
+		
 		if(screenOff){
 			if(!volumeDown){
 				if(mReceiverButton==null){
 					mReceiverButton = new RemoteControlReceiver();
 				}
-//				try{
-//					unregisterReceiver(mReceiver);
-//				}catch(Exception e){
-//					
-//				}
 				IntentFilter filer2 = new IntentFilter();
 				filer2.addAction("android.media.VOLUME_CHANGED_ACTION");
 			    mReceiverButton = new RemoteControlReceiver();
@@ -113,10 +117,6 @@ public class VolCameraService extends Service{
 				    	
 				    }
 				    
-//				    IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-//				    filter.addAction(Intent.ACTION_SCREEN_OFF);
-//				    registerReceiver(mReceiver, filter);
-				    
 				    Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 				    intentCamera.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				    startActivity(intentCamera);
@@ -153,5 +153,20 @@ public class VolCameraService extends Service{
 	    mReceiver = new ScreenReceiver();
 	    registerReceiver(mReceiver, filter);
 	    //mReceiverButton = new RemoteControlReceiver();
+	    
+	    Notification n  = new Notification.Builder(this)
+        .setContentTitle("VolCamera")
+        .setContentText("VolCamera activated")
+        .setSmallIcon(R.drawable.ic_launcher)
+        //.setContentIntent(pIntent)
+        //.setAutoCancel(true)
+        //.addAction(R.drawable.icon, "Call", pIntent)
+        //.addAction(R.drawable.icon, "More", pIntent)
+        //.addAction(R.drawable.icon, "And more", pIntent)
+        .build()
+        ;
+	    
+	    startForeground (1, n);
+	    
 	}
 } 
