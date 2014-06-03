@@ -16,7 +16,10 @@ public class ScreenReceiver extends BroadcastReceiver {
         } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
             screenOff = false;
         }
+    	i.putExtra("fromVolClicked", false);
+    	i.putExtra("fromScreenState", true);
         i.putExtra("screen_state", screenOff);
+        //i.putExtra("volume_clicked", false);
         context.startService(i);
     }
  
