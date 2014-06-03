@@ -10,15 +10,13 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.media.MediaActionSound;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.widget.MediaController.MediaPlayerControl;
-import android.widget.Toast;
 
 public class VolCameraService extends Service{
 	BroadcastReceiver mReceiver;
@@ -35,21 +33,21 @@ public class VolCameraService extends Service{
 		screenOff = intent.getBooleanExtra("screen_state", false);
 		volumeDown = intent.getBooleanExtra("volume_clicked", false);
 		if(screenOff){
-			KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-		    km.newKeyguardLock("KEYGUARD").reenableKeyguard();
 			if(!volumeDown){
 				if(mReceiverButton==null){
 					mReceiverButton = new RemoteControlReceiver();
 				}
-				try{
-					unregisterReceiver(mReceiver);
-				}catch(Exception e){
-					
-				}
+//				try{
+//					unregisterReceiver(mReceiver);
+//				}catch(Exception e){
+//					
+//				}
 				IntentFilter filer2 = new IntentFilter();
 				filer2.addAction("android.media.VOLUME_CHANGED_ACTION");
 			    mReceiverButton = new RemoteControlReceiver();
 			    registerReceiver(mReceiverButton, filer2);
+			    mediaPlayer = new MediaPlayer();
+			    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 				mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.correct);
 				mediaPlayer.setVolume(0.0f, 0.0f);
 				mediaPlayer.setLooping(true);
@@ -102,7 +100,7 @@ public class VolCameraService extends Service{
 				    	unregisterReceiver(mReceiverButton);
 				    	mReceiverButton = null;
 				    }
-				    km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+				    KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
 			        km.newKeyguardLock("KEYGUARD").disableKeyguard();
 				    try{
 				    	//unregisterReceiver(mReceiverButton);
@@ -115,9 +113,9 @@ public class VolCameraService extends Service{
 				    	
 				    }
 				    
-				    IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-				    filter.addAction(Intent.ACTION_SCREEN_OFF);
-				    registerReceiver(mReceiver, filter);
+//				    IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+//				    filter.addAction(Intent.ACTION_SCREEN_OFF);
+//				    registerReceiver(mReceiver, filter);
 				    
 				    Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 				    intentCamera.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -135,8 +133,8 @@ public class VolCameraService extends Service{
 				aListener=null;
 				sensorManager=null;
 			}
-			KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-		    km.newKeyguardLock("KEYGUARD").reenableKeyguard();
+//			KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+//		    km.newKeyguardLock("KEYGUARD").reenableKeyguard();
 		}
 	    return Service.START_STICKY;
 	}
