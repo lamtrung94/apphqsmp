@@ -13,22 +13,23 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.provider.MediaStore;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 public class VolCameraService extends Service{
-	BroadcastReceiver mReceiver;
-	BroadcastReceiver mReceiverButton = null;
-	SensorManager sensorManager = null;
-	SensorEventListener aListener = null;
-	int orientation = -1;
-	boolean screenOff;
-	boolean volumeDown;
-	
-	MediaPlayer mediaPlayer;
+	static BroadcastReceiver mReceiver;
+	static BroadcastReceiver mReceiverButton = null;
+	static SensorManager sensorManager = null;
+	static SensorEventListener aListener = null;
+	static int orientation = -1;
+	static boolean screenOff;
+	static boolean volumeDown;
+	static MediaPlayer mediaPlayer;
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {		
 		boolean isVolClicked = intent.getBooleanExtra("fromVolClicked", false);
@@ -96,6 +97,7 @@ public class VolCameraService extends Service{
 				    wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK
 				    	    			| PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG");  wl.acquire();
 				    wl.acquire();
+				    Log.d("PowerManager", "WAKE SCREEN!");
 				    wl.release();
 				    if(mReceiver==null){
 				    	mReceiver = new ScreenReceiver();
@@ -111,15 +113,20 @@ public class VolCameraService extends Service{
 				    	if(mediaPlayer!=null && mediaPlayer.isPlaying()){
 					    	mediaPlayer.stop();
 					    	mediaPlayer.release();
+					    	mediaPlayer=null;
 					    }
 				    	
 				    }catch(Exception e){
 				    	
 				    }
-				    
-				    Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-				    intentCamera.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				    startActivity(intentCamera);
+				    Handler handler = new Handler(); 
+				    handler.postDelayed(new Runnable() { 
+				         public void run() { 
+				        	 Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+							 intentCamera.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+							 startActivity(intentCamera); 
+				         } 
+				    }, 2000); 
 				}
 			}
 		}
@@ -133,6 +140,11 @@ public class VolCameraService extends Service{
 				aListener=null;
 				sensorManager=null;
 			}
+			if(mediaPlayer!=null && mediaPlayer.isPlaying()){
+		    	mediaPlayer.stop();
+		    	mediaPlayer.release();
+		    	mediaPlayer=null;
+		    }
 //			KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
 //		    km.newKeyguardLock("KEYGUARD").reenableKeyguard();
 		}
@@ -154,7 +166,7 @@ public class VolCameraService extends Service{
 	    registerReceiver(mReceiver, filter);
 	    //mReceiverButton = new RemoteControlReceiver();
 	    
-	    Notification n  = new Notification.Builder(this)
+	    Notification n  = new NotificationCompat.Builder(this)
         .setContentTitle("VolCamera")
         .setContentText("VolCamera activated")
         .setSmallIcon(R.drawable.ic_launcher)
