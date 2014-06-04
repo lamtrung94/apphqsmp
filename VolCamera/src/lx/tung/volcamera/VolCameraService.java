@@ -66,12 +66,12 @@ public class VolCameraService extends Service{
 		            public void onSensorChanged(SensorEvent event) {
 		                if (event.values[1]<6.5 && event.values[1]>-6.5) {
 		                    if (orientation!=1) {
-		                        VolCameraService.this.orientation = 1;//Landscape
+		                        VolCameraService.orientation = 1;//Landscape
 		                    }
 		                    orientation=1;
 		                } else {
 		                    if (orientation!=0) {
-		                    	VolCameraService.this.orientation = 0;//Portrait
+		                    	VolCameraService.orientation = 0;//Portrait
 		                    }
 		                    orientation=0;
 		                }
@@ -86,7 +86,7 @@ public class VolCameraService extends Service{
 		        sensorManager.registerListener(aListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_FASTEST);
 			}
 			else {
-				if(VolCameraService.this.orientation == 1){
+				if(VolCameraService.orientation == 1){
 					sensorManager.unregisterListener(aListener);
 					aListener=null;
 					sensorManager=null;
@@ -126,7 +126,8 @@ public class VolCameraService extends Service{
 							 intentCamera.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 							 startActivity(intentCamera); 
 				         } 
-				    }, 2000); 
+				    }, 1000);
+				    Log.d("VolCameraService", "After Camera");
 				}
 			}
 		}
