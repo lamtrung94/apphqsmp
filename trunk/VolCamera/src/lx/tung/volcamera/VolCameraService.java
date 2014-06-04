@@ -30,6 +30,7 @@ public class VolCameraService extends Service{
 	static boolean screenOff;
 	static boolean volumeDown;
 	static MediaPlayer mediaPlayer;
+	@SuppressWarnings("deprecation")
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {		
 		boolean isVolClicked = intent.getBooleanExtra("fromVolClicked", false);
@@ -106,8 +107,8 @@ public class VolCameraService extends Service{
 				    	unregisterReceiver(mReceiverButton);
 				    	mReceiverButton = null;
 				    }
-				    KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-			        km.newKeyguardLock("KEYGUARD").disableKeyguard();
+//				    KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+//			        km.newKeyguardLock("KEYGUARD").disableKeyguard();
 				    try{
 				    	//unregisterReceiver(mReceiverButton);
 				    	if(mediaPlayer!=null && mediaPlayer.isPlaying()){
@@ -119,14 +120,19 @@ public class VolCameraService extends Service{
 				    }catch(Exception e){
 				    	
 				    }
-				    Handler handler = new Handler(); 
-				    handler.postDelayed(new Runnable() { 
-				         public void run() { 
-				        	 Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-							 intentCamera.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-							 startActivity(intentCamera); 
-				         } 
-				    }, 1000);
+				    
+				    Intent intentIntemediateActivity = new Intent(getApplicationContext(), IntemediateActivty.class);
+				    intentIntemediateActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				    startActivity(intentIntemediateActivity);
+				    
+//				    Handler handler = new Handler(); 
+//				    handler.postDelayed(new Runnable() { 
+//				         public void run() { 
+//				        	 Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//							 intentCamera.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//							 startActivity(intentCamera); 
+//				         } 
+//				    }, 1000);
 				    Log.d("VolCameraService", "After Camera");
 				}
 			}
