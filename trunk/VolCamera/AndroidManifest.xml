@@ -37,9 +37,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="lx.tung.volcamera.IntemediateActivty"
+            android:label="@string/app_name" 
+            android:launchMode="singleInstance"
+            >
+        </activity>
         
         <receiver android:name="ScreenReceiver" >
         </receiver>
+        
+        
 <!--         <receiver android:name=".RemoteControlReceiver" android:enabled="true"> -->
 <!-- 		    <intent-filter> -->
 <!-- 		        <action android:name="android.intent.action.MEDIA_BUTTON" /> -->
