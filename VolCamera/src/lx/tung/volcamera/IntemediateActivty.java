@@ -12,7 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.view.WindowManager;
 
 public class IntemediateActivty extends ActionBarActivity {
 
@@ -68,6 +68,18 @@ public class IntemediateActivty extends ActionBarActivity {
 					false);
 			return rootView;
 		}
+	}
+	
+	@Override
+	public void onAttachedToWindow() {
+	    this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN | 
+	            WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | 
+	            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | 
+	            WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON,
+	            WindowManager.LayoutParams.FLAG_FULLSCREEN | 
+	            WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | 
+	            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | 
+	            WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 	}
 
 }
