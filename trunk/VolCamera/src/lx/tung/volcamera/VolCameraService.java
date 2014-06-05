@@ -1,6 +1,5 @@
 package lx.tung.volcamera;
 
-import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -13,11 +12,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-import android.provider.MediaStore;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -52,12 +49,12 @@ public class VolCameraService extends Service{
 				filer2.addAction("android.media.VOLUME_CHANGED_ACTION");
 			    mReceiverButton = new RemoteControlReceiver();
 			    registerReceiver(mReceiverButton, filer2);
-			    mediaPlayer = new MediaPlayer();
-			    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-				mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.correct);
-				mediaPlayer.setVolume(0.0f, 0.0f);
-				mediaPlayer.setLooping(true);
-				mediaPlayer.start();
+//			    mediaPlayer = new MediaPlayer();
+//			    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//				mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.silent);
+//				mediaPlayer.setVolume(0.0f, 0.0f);
+//				mediaPlayer.setLooping(false);
+//				mediaPlayer.start();
 			    
 			    sensorManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
 			    aListener = new SensorEventListener() {
@@ -68,11 +65,22 @@ public class VolCameraService extends Service{
 		                if (event.values[1]<6.5 && event.values[1]>-6.5) {
 		                    if (orientation!=1) {
 		                        VolCameraService.orientation = 1;//Landscape
+		                        if(VolCameraService.mediaPlayer!=null)
+		                        	VolCameraService.mediaPlayer.reset();
+		                        VolCameraService.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.silent);
+		                        VolCameraService.mediaPlayer.setVolume(0.0f, 0.0f);
+		                        VolCameraService.mediaPlayer.setLooping(false);
+		                        VolCameraService.mediaPlayer.start();
 		                    }
 		                    orientation=1;
 		                } else {
 		                    if (orientation!=0) {
 		                    	VolCameraService.orientation = 0;//Portrait
+		                    	if(VolCameraService.mediaPlayer!=null && VolCameraService.mediaPlayer.isPlaying()){
+		                    		VolCameraService.mediaPlayer.stop();
+		                    		VolCameraService.mediaPlayer.release();
+		                    		VolCameraService.mediaPlayer=null;
+							    }
 		                    }
 		                    orientation=0;
 		                }
@@ -124,7 +132,6 @@ public class VolCameraService extends Service{
 				    Intent intentIntemediateActivity = new Intent(getApplicationContext(), IntemediateActivty.class);
 				    intentIntemediateActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				    startActivity(intentIntemediateActivity);
-				    
 //				    Handler handler = new Handler(); 
 //				    handler.postDelayed(new Runnable() { 
 //				         public void run() { 
