@@ -8,10 +8,12 @@ import java.io.InputStreamReader;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.PowerManager;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnDoubleTapListener;
@@ -30,6 +32,9 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class BlackScreen extends Activity implements OnClickListener, OnGestureListener, OnDoubleTapListener {
+	static Handler mHandler;
+	static Runnable mRunnable;
+	
 	private ProgressDialog progressDialog;
 	private boolean isOff = false;
 	private Process proc;
@@ -55,7 +60,7 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         setContentView(R.layout.activity_main);
         try {
-			brightnessPath = "/sys/devices/platform/msm_fb.525825/leds/lcd-backlight/brightness";
+			brightnessPath = "/sys/devices/platform/msm_fb.525825/leds/lcd-backlight/brightness"; // LG Optimus G
 			float curBrightnessValue=android.provider.Settings.System.getInt(
 				    getContentResolver(), android.provider.Settings.System.SCREEN_BRIGHTNESS);
         	mOldBrightness_Sys = (int)Math.round(curBrightnessValue);
@@ -78,10 +83,30 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 			}
 		});
 		
+		mHandler = new Handler();
+		mRunnable = new Runnable() {
+			@Override
+			public void run() {
+				Log.d("BlackScreen", "manager.goToSleep();");
+				PowerManager manager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+				try {
+//					setBrightness(mOldBrightness_Sys);
+					BlackScreen.this.finish();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				manager.goToSleep(SystemClock.uptimeMillis());
+			}
+		};
+		
 		try {
 			isOff = true;
 			setBrightness(0);
 			Log.d("BlackScreen", "setBrightness(0);");
+			
+			//mHandler = new Handler();
+			mHandler.postDelayed(mRunnable, 5000);	
 //			setMinCPU();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -237,6 +262,10 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 		@Override
 		public boolean onDoubleTap(MotionEvent e) {
 			try {
+				Log.d("BlackScreen","mHandler.removeCallbacks(mRunnable);");
+				mHandler.removeCallbacksAndMessages(null);
+				mHandler = null;
+				mRunnable = null;
 				isOff = false;
 //				setDefaultCPU();
 				Intent i= new Intent(getApplicationContext(), KnockOnService.class);
@@ -246,6 +275,7 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 //		        mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 //		        mDPM.lockNow();
 		        setBrightness(mOldBrightness_Sys);
+		        
 				finish();
 			} catch (Exception ex) {
 				// TODO Auto-generated catch block

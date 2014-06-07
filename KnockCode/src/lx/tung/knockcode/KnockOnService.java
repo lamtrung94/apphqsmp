@@ -43,8 +43,12 @@ public class KnockOnService extends Service {
 	        
 	        if(knockOn == true){
 	        	Log.d("KnockOnService", "wake screen release");
+	        	Log.d("KnockOnService","mHandler.removeCallbacks(mRunnable);");
 	        	wl.release();
 	        	wl = null;
+	        	if(BlackScreen.mHandler!=null && BlackScreen.mRunnable != null){
+	        		BlackScreen.mHandler.removeCallbacksAndMessages(null);
+	        	}
 	        }
 	    } else {
 	    	Log.d("KnockOnService", "sensorManager.register;");
