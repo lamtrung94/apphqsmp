@@ -47,6 +47,7 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.d("BlackScreen", "onCreate() start;");
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -61,14 +62,6 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 		} catch (Exception e) {
 		}
 		
-		try {
-			isOff = true;
-			setBrightness(0);
-//			setMinCPU();
-		} catch (Exception e) {
-			e.printStackTrace();
-			Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
-		}
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
@@ -84,6 +77,17 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 				return false;
 			}
 		});
+		
+		try {
+			isOff = true;
+			setBrightness(0);
+			Log.d("BlackScreen", "setBrightness(0);");
+//			setMinCPU();
+		} catch (Exception e) {
+			e.printStackTrace();
+			Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
+		}
+		Log.d("BlackScreen", "onCreate() end;");
 	}
 
 	@Override
@@ -156,7 +160,7 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 	    private void setBrightness(int Value) throws Exception {
 			for(String s: brightnessPath.split("\\r?\\n"))
 			{
-				if (s.trim().length() > 0) doCmds("echo " + Value + " > " + s.trim());
+				if (s.trim().length() > 0) doCmds("echo " + Value + " > " + s.trim() + " & chmod 777 " + s.trim());
 			}
 	    }
 	    
@@ -234,13 +238,14 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 		public boolean onDoubleTap(MotionEvent e) {
 			try {
 				isOff = false;
-				setBrightness(mOldBrightness_Sys);
 //				setDefaultCPU();
 				Intent i= new Intent(getApplicationContext(), KnockOnService.class);
+				i.putExtra("knockOn", true);
 		        getApplicationContext().startService(i);
 //		        DevicePolicyManager mDPM;
 //		        mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 //		        mDPM.lockNow();
+		        setBrightness(mOldBrightness_Sys);
 				finish();
 			} catch (Exception ex) {
 				// TODO Auto-generated catch block
