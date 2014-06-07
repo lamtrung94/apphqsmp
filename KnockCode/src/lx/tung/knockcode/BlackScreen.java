@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.app.admin.DevicePolicyManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +22,6 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -50,6 +51,7 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         setContentView(R.layout.activity_main);
         try {
 			brightnessPath = "/sys/devices/platform/msm_fb.525825/leds/lcd-backlight/brightness";
@@ -65,6 +67,7 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 			setMinCPU();
 		} catch (Exception e) {
 			e.printStackTrace();
+			Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
 		}
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
@@ -235,6 +238,9 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 				setDefaultCPU();
 				Intent i= new Intent(getApplicationContext(), KnockOnService.class);
 		        getApplicationContext().startService(i);
+//		        DevicePolicyManager mDPM;
+//		        mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
+//		        mDPM.lockNow();
 				finish();
 			} catch (Exception ex) {
 				// TODO Auto-generated catch block

@@ -315,13 +315,9 @@ public class SysUtils {
 				cpus++;
 			}
 			for (int i = 1; i < cpus; i++) {
-				/*
-				 * Prepare permissions so that we can write; governor and frequencies
-				 * have different values (root:root vs root:system)
-				 */
-				commands.add("chmod 4777 " + SysUtils.cpu_enable_dir.replace("cpu0", "cpu" + i) + "\n");
 				commands.add("echo 0 > " + SysUtils.cpu_enable_dir.replace("cpu0", "cpu" + i)
-						+ "\n");
+						+ " & " + "chmod 777 " + SysUtils.cpu_enable_dir.replace("cpu0", "cpu" + i) + "\n");
+				
 			} // end-for: iteration on number of cores/cpus.
 			commands.add("exit\n");
 
@@ -339,6 +335,7 @@ public class SysUtils {
 				return true;
 			} else {
 				Toast.makeText(ctx, ctx.getString(resFailedMsg), Toast.LENGTH_LONG).show();
+				Log.d(ctx.getString(resFailedMsg), "disableCores");
 				return false;
 			}
 		} catch (Exception ex) {
@@ -387,10 +384,12 @@ public class SysUtils {
 				return true;
 			} else {
 				Toast.makeText(ctx, ctx.getString(resFailedMsg), Toast.LENGTH_LONG).show();
+				Log.d(ctx.getString(resFailedMsg), "disableCores");
 				return false;
 			}
 		} catch (Exception ex) {
 			Toast.makeText(ctx, "Error: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+			Log.d("Error: " + ex.getMessage(), "disableCores");
 			return false;
 		}
 	}
