@@ -4,12 +4,10 @@ import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.util.Log;
-import android.view.WindowManager;
 
 public class KnockOnService extends Service {
 	BroadcastReceiver mReceiver;
@@ -22,13 +20,13 @@ public class KnockOnService extends Service {
 	    } else {
 	    	WakeLock wl;
 	    	PowerManager pm;
+	    	Intent i = new Intent(this, BlackScreen.class);
+	        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	        startActivity(i);
 	    	pm = (PowerManager) getSystemService(POWER_SERVICE);
 	    	wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK
 	    			| PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG");  wl.acquire();
 	    	wl.acquire();
-	    	Intent i = new Intent(this, BlackScreen.class);
-	        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-	        startActivity(i);
 	        wl.release();
 	        unregisterReceiver(mReceiver);
 	    	Log.d("SCREEN", "ON");
