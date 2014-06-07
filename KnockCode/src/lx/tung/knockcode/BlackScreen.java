@@ -64,7 +64,7 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 		try {
 			isOff = true;
 			setBrightness(0);
-			setMinCPU();
+//			setMinCPU();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
@@ -235,7 +235,7 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 			try {
 				isOff = false;
 				setBrightness(mOldBrightness_Sys);
-				setDefaultCPU();
+//				setDefaultCPU();
 				Intent i= new Intent(getApplicationContext(), KnockOnService.class);
 		        getApplicationContext().startService(i);
 //		        DevicePolicyManager mDPM;
