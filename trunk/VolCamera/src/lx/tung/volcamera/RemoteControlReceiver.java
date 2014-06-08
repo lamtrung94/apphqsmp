@@ -14,7 +14,7 @@ public class RemoteControlReceiver extends BroadcastReceiver {
     	if (intent.getAction().equals("android.media.VOLUME_CHANGED_ACTION")) {    		
             int newVolume = intent.getIntExtra("android.media.EXTRA_VOLUME_STREAM_VALUE", 0);
             int oldVolume = intent.getIntExtra("android.media.EXTRA_PREV_VOLUME_STREAM_VALUE", 0);
-            if (newVolume >= oldVolume) {
+            if (newVolume <= oldVolume) {
             	Intent i = new Intent(context, VolCameraService.class);
             	i.putExtra("fromVolClicked", true);
             	i.putExtra("fromScreenState", false);
