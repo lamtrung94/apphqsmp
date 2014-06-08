@@ -1,5 +1,6 @@
 package lx.tung.knockcode;
 
+import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -23,6 +24,7 @@ public class KnockOnService extends Service {
 	static SensorEventListener aListener = null;
 	static int orientation = -1;
 	static WakeLock wl;
+	static KeyguardManager km;
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
@@ -42,6 +44,11 @@ public class KnockOnService extends Service {
 	        }
 	        
 	        if(knockOn == true){
+//		    	if(km == null){
+//		    		km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+//		    	}
+//		        km.newKeyguardLock("KEYGUARD").reenableKeyguard();
+//		        km = null;
 	        	Log.d("KnockOnService", "wake screen release");
 	        	Log.d("KnockOnService","mHandler.removeCallbacks(mRunnable);");
 	        	wl.release();
@@ -75,6 +82,8 @@ public class KnockOnService extends Service {
 	            	    	wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK
 	            	    			| PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG");
 	            	    	wl.acquire();
+	            	    	km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+	            	    	km.newKeyguardLock("KEYGUARD").disableKeyguard();
 	            	    	Log.d("KnockOnService", "wake screen acquire");
 	                    	
 	                    }
