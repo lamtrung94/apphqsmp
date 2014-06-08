@@ -6,5 +6,6 @@
     <string name="action_settings">Settings</string>
     <string name="ok">OK!</string>
     <string name="error">Error!</string>
+    <string name="hintKnockPass">Input 4 digits for Knock Code (From 1 to 4)</string>
 
 </resources>

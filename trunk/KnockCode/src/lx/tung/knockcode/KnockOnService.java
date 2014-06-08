@@ -1,5 +1,12 @@
 package lx.tung.knockcode;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
 import android.app.KeyguardManager;
 import android.app.Notification;
 import android.app.Service;
@@ -13,6 +20,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.IBinder;
 import android.os.PowerManager;
+import android.os.SystemClock;
 import android.os.PowerManager.WakeLock;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -25,6 +33,7 @@ public class KnockOnService extends Service {
 	static int orientation = -1;
 	static WakeLock wl;
 	static KeyguardManager km;
+	static String knockCode;
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
@@ -32,7 +41,8 @@ public class KnockOnService extends Service {
 		Log.d("KnockOnService", "onStartCommand() start;");
 		boolean screenOff = intent.getBooleanExtra("screen_state", false);
 		boolean knockOn = intent.getBooleanExtra("knockOn", false);
-		
+		knockCode = readFromFile();
+		Log.d("KNOCK CODE:", knockCode);
 		Log.d("KnockOnService", "screenOff: " + screenOff);
 	    if (!screenOff) {
 	        if(sensorManager != null && aListener != null){
@@ -56,6 +66,13 @@ public class KnockOnService extends Service {
 	        	if(BlackScreen.mHandler!=null && BlackScreen.mRunnable != null){
 	        		BlackScreen.mHandler.removeCallbacksAndMessages(null);
 	        	}
+	        }else{
+	        	if(BlackScreen.running == false){
+	        		PowerManager manager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+		        	manager.goToSleep(SystemClock.uptimeMillis());
+	        	}
+//	        	PowerManager manager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+//	        	manager.goToSleep(SystemClock.uptimeMillis());
 	        }
 	    } else {
 	    	Log.d("KnockOnService", "sensorManager.register;");
@@ -85,7 +102,6 @@ public class KnockOnService extends Service {
 	            	    	km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
 	            	    	km.newKeyguardLock("KEYGUARD").disableKeyguard();
 	            	    	Log.d("KnockOnService", "wake screen acquire");
-	                    	
 	                    }
 	                    orientation=0;
 	                }
@@ -131,4 +147,48 @@ public class KnockOnService extends Service {
 	    
 	    Log.d("KnockOnService", "ONCREATE");
 	}
+	
+	private String readFromFile() {
+        
+        String ret = "";
+         
+        try {
+            InputStream inputStream = openFileInput("aTxt");
+             
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+                 
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString);
+                }
+                 
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("readFromFile", "File not found: " + e.toString());
+            ret = "0";
+            writeToFile("0");
+        } catch (IOException e) {
+            Log.e("readFromFile", "Can not read file: " + e.toString());
+        }
+ 
+        return ret;
+    }
+	
+	private void writeToFile(String data) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(openFileOutput("aTxt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("writeToFile", "File write failed: " + e.toString());
+        } 
+         
+    }
 } 
