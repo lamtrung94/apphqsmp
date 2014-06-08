@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.KeyguardManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -29,12 +28,16 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-public class BlackScreen extends Activity implements OnClickListener, OnGestureListener, OnDoubleTapListener {
+public class BlackScreen extends Activity implements OnClickListener
+//, OnGestureListener, OnDoubleTapListener 
+{
 	static Handler mHandler;
 	static Runnable mRunnable;
+	static boolean running = false;
 	
 	private ProgressDialog progressDialog;
 	private boolean isOff = false;
@@ -44,8 +47,12 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 	private String brightnessPath = "";	
 	private Boolean mFastBrightnessmethod;
 	private int mOldBrightness_Sys;
-	private LinearLayout wakeBtn;
+//	private LinearLayout wakeBtn;
 	private static GestureDetector gd;
+	static String currentPassword;
+	
+	private Button btn1, btn2, btn3, btn4;
+	
 	public void onBackPressed() {
 		return;
 	}
@@ -54,6 +61,8 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.d("BlackScreen", "onCreate() start;");
+		currentPassword = "";
+		running = true;
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -62,27 +71,38 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
         setContentView(R.layout.activity_main);
         try {
 			brightnessPath = "/sys/devices/platform/msm_fb.525825/leds/lcd-backlight/brightness"; // LG Optimus G
+			// brightnessPath = "/sys/devices/platform/msm_fb.526593/leds/lcd-backlight/brightness"; // LG Optimus G Pro
 			float curBrightnessValue=android.provider.Settings.System.getInt(
 				    getContentResolver(), android.provider.Settings.System.SCREEN_BRIGHTNESS);
         	mOldBrightness_Sys = (int)Math.round(curBrightnessValue);
 		} catch (Exception e) {
 		}
 		
-		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
+//		if (savedInstanceState == null) {
+//			getFragmentManager().beginTransaction()
+//					.add(R.id.container, new PlaceholderFragment()).commit();
+//		}
 		
-		wakeBtn = (LinearLayout) findViewById(R.id.wakeBtn);
-		gd = new GestureDetector(this);
-		gd.setOnDoubleTapListener(this);
-		wakeBtn.setOnTouchListener(new OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				BlackScreen.gd.onTouchEvent(event);
-				return false;
-			}
-		});
+		//wakeBtn = (LinearLayout) findViewById(R.id.wakeBtn);
+		
+		btn1=(Button) findViewById(R.id.btn1);
+		btn1.setOnClickListener(this);
+		btn2=(Button) findViewById(R.id.btn2);
+		btn2.setOnClickListener(this);
+		btn3=(Button) findViewById(R.id.btn3);
+		btn3.setOnClickListener(this);
+		btn4=(Button) findViewById(R.id.btn4);
+		btn4.setOnClickListener(this);
+		
+//		gd = new GestureDetector(this);
+//		gd.setOnDoubleTapListener(this);
+//		wakeBtn.setOnTouchListener(new OnTouchListener() {
+//			@Override
+//			public boolean onTouch(View v, MotionEvent event) {
+//				BlackScreen.gd.onTouchEvent(event);
+//				return false;
+//			}
+//		});
 		
 		mHandler = new Handler();
 		mRunnable = new Runnable() {
@@ -97,6 +117,7 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 //			    	}
 //			    	KnockOnService.km.newKeyguardLock("KEYGUARD").reenableKeyguard();
 //			    	KnockOnService.km = null;
+					running = false;
 					BlackScreen.this.finish();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -112,7 +133,7 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 			Log.d("BlackScreen", "setBrightness(0);");
 			
 			//mHandler = new Handler();
-			mHandler.postDelayed(mRunnable, 5000);	
+			mHandler.postDelayed(mRunnable, 6000);	
 //			setMinCPU();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -144,19 +165,19 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
-					false);
-			return rootView;
-		}
-	}
+//	public static class PlaceholderFragment extends Fragment {
+//
+//		public PlaceholderFragment() {
+//		}
+//
+//		@Override
+//		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//				Bundle savedInstanceState) {
+//			View rootView = inflater.inflate(R.layout.fragment_main, container,
+//					false);
+//			return rootView;
+//		}
+//	}
 	
 	    private String getBrightnessPath() throws Exception
 		{
@@ -221,93 +242,143 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 //			return false;
 //		}
 
-		@Override
-		public boolean onDown(MotionEvent e) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public void onShowPress(MotionEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public boolean onSingleTapUp(MotionEvent e) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public boolean onScroll(MotionEvent e1, MotionEvent e2,
-				float distanceX, float distanceY) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public void onLongPress(MotionEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-				float velocityY) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public boolean onSingleTapConfirmed(MotionEvent e) {
-			Log.d("onSingleTapConfirmed", "onSingleTapConfirmed");
-			return false;
-		}
-
-		@Override
-		public boolean onDoubleTap(MotionEvent e) {
-			try {
-				Log.d("BlackScreen","mHandler.removeCallbacks(mRunnable);");
-				mHandler.removeCallbacksAndMessages(null);
-				mHandler = null;
-				mRunnable = null;
-				isOff = false;
-//				setDefaultCPU();
-				Intent i= new Intent(getApplicationContext(), KnockOnService.class);
-				i.putExtra("knockOn", true);
-		        getApplicationContext().startService(i);
-//		        DevicePolicyManager mDPM;
-//		        mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
-//		        mDPM.lockNow();
-		        setBrightness(mOldBrightness_Sys);
-		        
-				finish();
-			} catch (Exception ex) {
-				// TODO Auto-generated catch block
-				ex.printStackTrace();
-			}
-			return false;
-		}
-
-		
-		@Override
-		public boolean onDoubleTapEvent(MotionEvent e) {
-//			Log.d("DOUBLE TAP", "DOUBLE TAP");
+//		@Override
+//		public boolean onDown(MotionEvent e) {
+//			// TODO Auto-generated method stub
+//			return false;
+//		}
+//
+//		@Override
+//		public void onShowPress(MotionEvent e) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//
+//		@Override
+//		public boolean onSingleTapUp(MotionEvent e) {
+//			// TODO Auto-generated method stub
+//			return false;
+//		}
+//
+//		@Override
+//		public boolean onScroll(MotionEvent e1, MotionEvent e2,
+//				float distanceX, float distanceY) {
+//			// TODO Auto-generated method stub
+//			return false;
+//		}
+//
+//		@Override
+//		public void onLongPress(MotionEvent e) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//
+//		@Override
+//		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+//				float velocityY) {
+//			// TODO Auto-generated method stub
+//			return false;
+//		}
+//
+//		@Override
+//		public boolean onSingleTapConfirmed(MotionEvent e) {
+//			Log.d("onSingleTapConfirmed", "onSingleTapConfirmed");
+//			return false;
+//		}
+//
+//		@Override
+//		public boolean onDoubleTap(MotionEvent e) {
 //			try {
+//				Log.d("BlackScreen","mHandler.removeCallbacks(mRunnable);");
+//				mHandler.removeCallbacksAndMessages(null);
+//				mHandler = null;
+//				mRunnable = null;
 //				isOff = false;
-//				setBrightness(mOldBrightness_Sys);
-//				setDefaultCPU();
+////				setDefaultCPU();
+//				Intent i= new Intent(getApplicationContext(), KnockOnService.class);
+//				i.putExtra("knockOn", true);
+//		        getApplicationContext().startService(i);
+////		        DevicePolicyManager mDPM;
+////		        mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
+////		        mDPM.lockNow();
+//		        setBrightness(mOldBrightness_Sys);
+//		        
 //				finish();
 //			} catch (Exception ex) {
 //				// TODO Auto-generated catch block
 //				ex.printStackTrace();
 //			}
-			return false;
-		}
+//			return false;
+//		}
+//
+//		
+//		@Override
+//		public boolean onDoubleTapEvent(MotionEvent e) {
+////			Log.d("DOUBLE TAP", "DOUBLE TAP");
+////			try {
+////				isOff = false;
+////				setBrightness(mOldBrightness_Sys);
+////				setDefaultCPU();
+////				finish();
+////			} catch (Exception ex) {
+////				// TODO Auto-generated catch block
+////				ex.printStackTrace();
+////			}
+//			return false;
+//		}
 
 		@Override
 		public void onClick(View v) {
+			if(v.getId() == R.id.btn1){
+				currentPassword += "1";
+				Log.d("onClick", "btn1");
+				Log.d("currentPassword", currentPassword);
+				Log.d("KnockOnService.knockCode", KnockOnService.knockCode);
+			}else if(v.getId() == R.id.btn2){
+				currentPassword += "2";
+				Log.d("onClick", "btn2");
+				Log.d("currentPassword", currentPassword);
+				Log.d("KnockOnService.knockCode", KnockOnService.knockCode);
+			}else if(v.getId() == R.id.btn3){
+				currentPassword += "3";
+				Log.d("onClick", "btn3");
+				Log.d("currentPassword", currentPassword);
+				Log.d("KnockOnService.knockCode", KnockOnService.knockCode);
+			}else if(v.getId() == R.id.btn4){
+				currentPassword += "4";
+				Log.d("onClick", "btn4");
+				Log.d("currentPassword", currentPassword);
+				Log.d("KnockOnService.knockCode", KnockOnService.knockCode);
+			}
+			if(currentPassword.length()==4){
+				if(currentPassword.trim().equals(KnockOnService.knockCode.trim())){
+					try {
+						Log.d("BlackScreen","mHandler.removeCallbacks(mRunnable);");
+						mHandler.removeCallbacksAndMessages(null);
+						mHandler = null;
+						mRunnable = null;
+						isOff = false;
+						running = false;
+//						setDefaultCPU();
+						Intent i= new Intent(getApplicationContext(), KnockOnService.class);
+						i.putExtra("knockOn", true);
+				        getApplicationContext().startService(i);
+//				        DevicePolicyManager mDPM;
+//				        mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
+//				        mDPM.lockNow();
+				        setBrightness(mOldBrightness_Sys);
+				        
+						finish();
+					} catch (Exception ex) {
+						// TODO Auto-generated catch block
+						ex.printStackTrace();
+					}
+				}else{
+					currentPassword = "";
+				}
+				
+			}
+			
 			// TODO Auto-generated method stub
 			
 		};
