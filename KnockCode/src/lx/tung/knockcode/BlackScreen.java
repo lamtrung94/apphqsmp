@@ -51,7 +51,7 @@ public class BlackScreen extends Activity implements OnClickListener
 	private static GestureDetector gd;
 	static String currentPassword;
 	
-	private Button btn1, btn2, btn3, btn4;
+	private Button btn1, btn2, btn3, btn4, btnReset;
 	
 	public void onBackPressed() {
 		return;
@@ -93,6 +93,8 @@ public class BlackScreen extends Activity implements OnClickListener
 		btn3.setOnClickListener(this);
 		btn4=(Button) findViewById(R.id.btn4);
 		btn4.setOnClickListener(this);
+		btnReset=(Button) findViewById(R.id.btnReset);
+		btnReset.setOnClickListener(this);
 		
 //		gd = new GestureDetector(this);
 //		gd.setOnDoubleTapListener(this);
@@ -347,6 +349,13 @@ public class BlackScreen extends Activity implements OnClickListener
 			}else if(v.getId() == R.id.btn4){
 				currentPassword += "4";
 				Log.d("onClick", "btn4");
+				Log.d("currentPassword", currentPassword);
+				Log.d("KnockOnService.knockCode", KnockOnService.knockCode);
+			}else if(v.getId() == R.id.btnReset){
+				currentPassword = "";
+				mHandler.removeCallbacksAndMessages(null);
+				mHandler.postDelayed(mRunnable, 5000);
+				Log.d("onClick", "btnReset");
 				Log.d("currentPassword", currentPassword);
 				Log.d("KnockOnService.knockCode", KnockOnService.knockCode);
 			}
