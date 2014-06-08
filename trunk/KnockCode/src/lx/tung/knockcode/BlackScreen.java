@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.KeyguardManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -91,6 +92,11 @@ public class BlackScreen extends Activity implements OnClickListener, OnGestureL
 				PowerManager manager = (PowerManager) getSystemService(Context.POWER_SERVICE);
 				try {
 //					setBrightness(mOldBrightness_Sys);
+//			    	if(KnockOnService.km == null){
+//			    		KnockOnService.km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+//			    	}
+//			    	KnockOnService.km.newKeyguardLock("KEYGUARD").reenableKeyguard();
+//			    	KnockOnService.km = null;
 					BlackScreen.this.finish();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
