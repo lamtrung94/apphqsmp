@@ -26,7 +26,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 public class KnockOnService extends Service {
-	BroadcastReceiver mReceiver;
+	static BroadcastReceiver mReceiver;
 	
 	static SensorManager sensorManager = null;
 	static SensorEventListener aListener = null;
