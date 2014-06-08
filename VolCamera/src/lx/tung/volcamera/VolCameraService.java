@@ -27,6 +27,7 @@ public class VolCameraService extends Service{
 	static boolean screenOff;
 	static boolean volumeDown;
 	static MediaPlayer mediaPlayer;
+	static WakeLock wl;
 	@SuppressWarnings("deprecation")
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {		
@@ -49,12 +50,6 @@ public class VolCameraService extends Service{
 				filer2.addAction("android.media.VOLUME_CHANGED_ACTION");
 			    mReceiverButton = new RemoteControlReceiver();
 			    registerReceiver(mReceiverButton, filer2);
-//			    mediaPlayer = new MediaPlayer();
-//			    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//				mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.silent);
-//				mediaPlayer.setVolume(0.0f, 0.0f);
-//				mediaPlayer.setLooping(false);
-//				mediaPlayer.start();
 			    
 			    sensorManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
 			    aListener = new SensorEventListener() {
@@ -92,7 +87,7 @@ public class VolCameraService extends Service{
 
 		            }
 		        };
-		        sensorManager.registerListener(aListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_FASTEST);
+		        sensorManager.registerListener(aListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
 			}
 			else {
 				if(VolCameraService.orientation == 1){
@@ -100,13 +95,12 @@ public class VolCameraService extends Service{
 					aListener=null;
 					sensorManager=null;
 					
-					WakeLock wl;
+					//WakeLock wl;
 				    PowerManager pm;
 				    pm = (PowerManager) getSystemService(POWER_SERVICE);
 				    wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK
-				    	    			| PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG");  wl.acquire();
+				    	    			| PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG");
 				    wl.acquire();
-				    Log.d("PowerManager", "WAKE SCREEN!");
 				    wl.release();
 				    if(mReceiver==null){
 				    	mReceiver = new ScreenReceiver();
@@ -115,8 +109,6 @@ public class VolCameraService extends Service{
 				    	unregisterReceiver(mReceiverButton);
 				    	mReceiverButton = null;
 				    }
-//				    KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-//			        km.newKeyguardLock("KEYGUARD").disableKeyguard();
 				    try{
 				    	//unregisterReceiver(mReceiverButton);
 				    	if(mediaPlayer!=null && mediaPlayer.isPlaying()){
@@ -132,19 +124,14 @@ public class VolCameraService extends Service{
 				    Intent intentIntemediateActivity = new Intent(getApplicationContext(), IntemediateActivty.class);
 				    intentIntemediateActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				    startActivity(intentIntemediateActivity);
-//				    Handler handler = new Handler(); 
-//				    handler.postDelayed(new Runnable() { 
-//				         public void run() { 
-//				        	 Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//							 intentCamera.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//							 startActivity(intentCamera); 
-//				         } 
-//				    }, 1000);
-				    Log.d("VolCameraService", "After Camera");
 				}
 			}
 		}
 		else{
+			if (wl!=null && wl.isHeld()){
+				wl.release();
+				wl = null;
+			}
 			if (mReceiverButton != null){
 		    	unregisterReceiver(mReceiverButton);
 		    	mReceiverButton = null;
@@ -159,8 +146,6 @@ public class VolCameraService extends Service{
 		    	mediaPlayer.release();
 		    	mediaPlayer=null;
 		    }
-//			KeyguardManager km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-//		    km.newKeyguardLock("KEYGUARD").reenableKeyguard();
 		}
 	    return Service.START_STICKY;
 	}
