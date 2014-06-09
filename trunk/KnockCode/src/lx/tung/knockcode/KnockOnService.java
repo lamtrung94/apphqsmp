@@ -34,6 +34,7 @@ public class KnockOnService extends Service {
 	static WakeLock wl;
 	static KeyguardManager km;
 	static String knockCode;
+	static boolean restartScreenOn = false;
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
@@ -63,11 +64,14 @@ public class KnockOnService extends Service {
 	        	Log.d("KnockOnService","mHandler.removeCallbacks(mRunnable);");
 	        	wl.release();
 	        	wl = null;
-	        	if(BlackScreen.mHandler!=null && BlackScreen.mRunnable != null){
-	        		BlackScreen.mHandler.removeCallbacksAndMessages(null);
+	        	if(KnockCodeBlackScreen.mHandler!=null && KnockCodeBlackScreen.mRunnable != null){
+	        		KnockCodeBlackScreen.mHandler.removeCallbacksAndMessages(null);
+	        	}
+	        	if(KnockOnBlackScreen.mHandler!=null && KnockOnBlackScreen.mRunnable != null){
+	        		KnockCodeBlackScreen.mHandler.removeCallbacksAndMessages(null);
 	        	}
 	        }else{
-	        	if(BlackScreen.running == false){
+	        	if(KnockCodeBlackScreen.running == false && KnockOnBlackScreen.running == false){
 	        		PowerManager manager = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		        	manager.goToSleep(SystemClock.uptimeMillis());
 	        	}
@@ -85,13 +89,20 @@ public class KnockOnService extends Service {
 	                if (event.values[1]<6.5 && event.values[1]>-6.5) {
 	                    if (orientation!=1) {
 	                        KnockOnService.orientation = 1;//Landscape
+	                        restartScreenOn = true;
 	                    }
 	                    orientation=1;
 	                } else {
-	                    if (orientation!=0) {
+	                    if (orientation!=0 && restartScreenOn == true) {
 	                    	KnockOnService.orientation = 0;//Portrait
 	                    	Log.d("KnockOnService", "wake screen");
-	                    	Intent i = new Intent(KnockOnService.this, BlackScreen.class);
+	                    	Intent i;
+	                    	if(!knockCode.trim().equals("0000")){
+	                    		i = new Intent(KnockOnService.this, KnockCodeBlackScreen.class);
+	                    	}else{
+	                    		i = new Intent(KnockOnService.this, KnockOnBlackScreen.class);
+	                    	}
+	                    	
 	            	        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	            	        startActivity(i);
 	            	    	PowerManager pm;
@@ -102,6 +113,7 @@ public class KnockOnService extends Service {
 	            	    	km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
 	            	    	km.newKeyguardLock("KEYGUARD").disableKeyguard();
 	            	    	Log.d("KnockOnService", "wake screen acquire");
+	            	    	restartScreenOn = false;
 	                    }
 	                    orientation=0;
 	                }
@@ -144,7 +156,7 @@ public class KnockOnService extends Service {
         .setSmallIcon(R.drawable.ic_launcher).build();
 	    
 	    startForeground (1, n);
-	    
+	    restartScreenOn = true;
 	    Log.d("KnockOnService", "ONCREATE");
 	}
 	
