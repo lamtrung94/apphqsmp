@@ -62,8 +62,8 @@ public class KnockCodeBlackScreen extends Activity implements OnClickListener
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         setContentView(R.layout.activity_main);
         try {
-//			brightnessPath = "/sys/devices/platform/msm_fb.525825/leds/lcd-backlight/brightness"; // LG Optimus G
-			 brightnessPath = "/sys/devices/platform/msm_fb.526593/leds/lcd-backlight/brightness"; // LG Optimus G Pro
+			brightnessPath = "/sys/devices/platform/msm_fb.525825/leds/lcd-backlight/brightness"; // LG Optimus G
+//			 brightnessPath = "/sys/devices/platform/msm_fb.526593/leds/lcd-backlight/brightness"; // LG Optimus G Pro
 			float curBrightnessValue=android.provider.Settings.System.getInt(
 				    getContentResolver(), android.provider.Settings.System.SCREEN_BRIGHTNESS);
         	mOldBrightness_Sys = (int)Math.round(curBrightnessValue);
