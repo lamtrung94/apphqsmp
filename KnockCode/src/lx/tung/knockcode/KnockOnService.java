@@ -18,6 +18,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.SystemClock;
@@ -68,7 +69,7 @@ public class KnockOnService extends Service {
 	        		KnockCodeBlackScreen.mHandler.removeCallbacksAndMessages(null);
 	        	}
 	        	if(KnockOnBlackScreen.mHandler!=null && KnockOnBlackScreen.mRunnable != null){
-	        		KnockCodeBlackScreen.mHandler.removeCallbacksAndMessages(null);
+	        		KnockOnBlackScreen.mHandler.removeCallbacksAndMessages(null);
 	        	}
 	        }else{
 	        	if(KnockCodeBlackScreen.running == false && KnockOnBlackScreen.running == false){
@@ -98,14 +99,17 @@ public class KnockOnService extends Service {
 	                    	Log.d("KnockOnService", "wake screen");
 	                    	Intent i;
 	                    	if(!knockCode.trim().equals("0000")){
+	                    		KnockCodeBlackScreen.running = true;
 	                    		i = new Intent(KnockOnService.this, KnockCodeBlackScreen.class);
+	                    		Log.d("KnockOnService", "KnockCodeBlackScreenIntent");
 	                    	}else{
+	                    		KnockOnBlackScreen.running = true;
 	                    		i = new Intent(KnockOnService.this, KnockOnBlackScreen.class);
+	                    		Log.d("KnockOnService", "KnockOnBlackScreenIntent");
 	                    	}
 	                    	
-	            	        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-	            	        startActivity(i);
-	            	    	PowerManager pm;
+	            	        
+	                    	PowerManager pm;
 	            	    	pm = (PowerManager) getSystemService(POWER_SERVICE);
 	            	    	wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK
 	            	    			| PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG");
@@ -114,6 +118,9 @@ public class KnockOnService extends Service {
 	            	    	km.newKeyguardLock("KEYGUARD").disableKeyguard();
 	            	    	Log.d("KnockOnService", "wake screen acquire");
 	            	    	restartScreenOn = false;
+	            	    	i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	            	        startActivity(i);
+	            	    	
 	                    }
 	                    orientation=0;
 	                }
@@ -147,6 +154,7 @@ public class KnockOnService extends Service {
 	    // REGISTER RECEIVER THAT HANDLES SCREEN ON AND SCREEN OFF LOGIC
 	    IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
 	    filter.addAction(Intent.ACTION_SCREEN_OFF);
+	    filter.setPriority(10000);
 	    mReceiver = new ScreenReceiver();
 	    registerReceiver(mReceiver, filter);
 	    
