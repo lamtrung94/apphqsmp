@@ -7,14 +7,14 @@ import java.io.InputStreamReader;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.KeyguardManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
-import android.os.SystemClock;
+import android.provider.Settings;
+import android.provider.Settings.SettingNotFoundException;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnDoubleTapListener;
@@ -58,7 +58,7 @@ public class KnockOnBlackScreen extends Activity implements OnClickListener, OnG
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
         setContentView(R.layout.knockon_main);
         running = true;
@@ -100,13 +100,17 @@ public class KnockOnBlackScreen extends Activity implements OnClickListener, OnG
 //			    	}
 //			    	KnockOnService.km.newKeyguardLock("KEYGUARD").reenableKeyguard();
 //			    	KnockOnService.km = null;
+					if(KnockOnService.wl!=null){
+						KnockOnService.wl.release();
+						KnockOnService.wl=null;
+					}
 					running = false;
 					KnockOnBlackScreen.this.finish();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
-				manager.goToSleep(SystemClock.uptimeMillis());
+				}				
+//				manager.goToSleep(SystemClock.uptimeMillis());
 			}
 		};
 		
@@ -116,6 +120,17 @@ public class KnockOnBlackScreen extends Activity implements OnClickListener, OnG
 			Log.d("KnockOnBlackScreen", "setBrightness(0);");
 			
 			//mHandler = new Handler();
+			try {
+				KnockOnService.oldTimeOutTime = android.provider.Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT);
+				Log.d("KnockOnService.oldTimeOutTime", Integer.toString(android.provider.Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT)));
+				android.provider.Settings.System.putInt(getContentResolver(),
+			            Settings.System.SCREEN_OFF_TIMEOUT, 1000);
+				Log.d("SCREEN_OFF_TIMEOUT_AFTER", Integer.toString(android.provider.Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT)));
+			} catch (SettingNotFoundException e) {
+				Log.e("SettingNotFoundException", e.toString());
+				e.printStackTrace();
+//				e.printStackTrace();
+			}
 			mHandler.postDelayed(mRunnable, 5000);	
 //			setMinCPU();
 		} catch (Exception e) {
@@ -286,6 +301,8 @@ public class KnockOnBlackScreen extends Activity implements OnClickListener, OnG
 //		        mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
 //		        mDPM.lockNow();
 		        setBrightness(mOldBrightness_Sys);
+		        android.provider.Settings.System.putInt(getContentResolver(),
+			            Settings.System.SCREEN_OFF_TIMEOUT, KnockOnService.oldTimeOutTime);
 				finish();
 			} catch (Exception ex) {
 				// TODO Auto-generated catch block
