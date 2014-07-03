@@ -1,0 +1,214 @@
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    >
+    <LinearLayout 
+	    android:orientation="vertical"
+	    android:gravity="center_horizontal"
+	    android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+	    android:background="@color/greybg"
+	    android:id="@+id/mainlayout"
+	     >
+	    <LinearLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    android:layout_weight="8"
+		    android:orientation="vertical"
+		    android:gravity="center_horizontal"
+		    android:id="@+id/game"
+		    >
+	<!-- 	    <TextView -->
+	<!-- 	        android:id="@+id/score" -->
+	<!-- 	        android:layout_width="fill_parent" -->
+	<!-- 	        android:layout_height="wrap_content" -->
+	<!-- 	        android:text="@string/score" -->
+	<!-- 	        android:textSize="23sp" -->
+	<!-- 	        android:gravity="center_horizontal" -->
+	<!-- 	        android:background="@color/greenmain" -->
+	<!-- 	        android:textColor="@color/white1" -->
+	<!-- 	        android:paddingTop="5dp" -->
+	<!-- 	        android:paddingBottom="5dp" -->
+	<!-- 	        android:layout_gravity="center_horizontal" -->
+	<!-- 	         /> -->
+		    
+		    <LinearLayout 
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:orientation="vertical"
+		        
+		        >
+		        
+	<!-- 	        <RelativeLayout -->
+	<!-- 	            android:layout_width="fill_parent" -->
+	<!-- 	            android:layout_height="wrap_content" -->
+	<!-- 	            > -->
+	<!-- 	        	<ImageView -->
+	<!-- 			        android:id="@+id/timer" -->
+	<!-- 			        android:layout_width="wrap_content" -->
+	<!-- 			        android:layout_height="wrap_content" -->
+	<!-- 			        android:src="@drawable/theline"         -->
+	<!-- 			        android:paddingBottom="5dp" -->
+	<!-- 			        android:paddingTop="20dp" -->
+	<!-- 			        android:layout_centerInParent="true" -->
+	<!-- 			        /> -->
+		        	
+	<!-- 	        	<ImageView -->
+	<!-- 			        android:id="@+id/clock" -->
+	<!-- 			        android:layout_width="wrap_content" -->
+	<!-- 			        android:layout_height="wrap_content" -->
+	<!-- 			        android:src="@drawable/clock"         -->
+	<!-- 			        android:layout_alignRight="@id/timer" -->
+	<!-- 			        android:layout_alignBaseline="@id/timer" -->
+	<!-- 			        android:background="@color/greybg" -->
+	<!-- 			        /> -->
+		            
+	<!-- 	        </RelativeLayout> -->
+		        
+		        <LinearLayout
+		            android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:orientation="horizontal"
+			        android:gravity="center"
+			        
+		            >
+		            <Button
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:background="@drawable/number01"
+		                android:id="@+id/number01"
+		                android:textColor="@color/greenmain"
+		                android:textSize="50sp"
+		                android:text="1"
+		                />
+		            
+		            <Button
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:background="@drawable/number02"
+		                android:id="@+id/number02"
+		                android:textColor="@color/greenmain"
+		                android:textSize="50sp"
+		                android:text="10"
+		                />
+		            
+		            
+		        </LinearLayout>
+		        
+		        <LinearLayout
+		            android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:orientation="horizontal"
+			        android:gravity="center"
+		            >
+		            <Button
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:background="@drawable/number03"
+		                android:id="@+id/number03"
+		                android:textColor="@color/greenmain"
+		                android:textSize="50sp"
+		                android:text="3"
+		                />
+		            
+		            <Button
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:background="@drawable/number04"
+		                android:id="@+id/number04"
+		                android:textColor="@color/greenmain"
+		                android:textSize="50sp"
+		                android:text="40"
+		                />
+		            
+		            
+		        </LinearLayout>
+		    </LinearLayout>
+		    
+	<!-- 	    <TextView -->
+	<!-- 	        android:paddingTop="20dp" -->
+	<!-- 	        android:id="@+id/result" -->
+	<!-- 	        android:layout_width="fill_parent" -->
+	<!-- 	        android:layout_height="wrap_content" -->
+	<!-- 	        android:text="WRONG WRONG WRONG :))" -->
+	<!-- 	        android:textSize="20sp" -->
+	<!-- 	        android:gravity="center_horizontal"         -->
+	<!-- 	        android:paddingBottom="5dp" -->
+	<!-- 	        android:textColor="@color/gray" -->
+	<!-- 	         /> -->
+		        	    
+		</LinearLayout>
+		
+	<!--     <LinearLayout -->
+	<!-- 	        android:layout_width="fill_parent" -->
+	<!-- 	        android:layout_height="0dp" -->
+	<!-- 	        android:layout_weight="1" -->
+	<!-- 	        android:orientation="horizontal" -->
+	<!-- 	        android:id="@+id/adlinearlayout"  -->
+	<!-- 	        android:background="@color/greenmain" -->
+	<!-- 	        android:gravity="center_horizontal" -->
+	<!-- 	        > -->
+	<!-- 		<Button -->
+	<!-- 	                android:layout_width="wrap_content" -->
+	<!-- 	                android:layout_height="wrap_content" -->
+	<!-- 	                android:id="@+id/facebook" -->
+	<!-- 	                android:layout_margin="5dp" -->
+	<!-- 	                android:textSize="20sp" -->
+	<!-- 	                android:text="facebook" -->
+	<!-- 	                /> -->
+	<!-- 		<Button -->
+	<!-- 	                android:layout_width="wrap_content" -->
+	<!-- 	                android:layout_height="wrap_content" -->
+	<!-- 	                android:id="@+id/twitter" -->
+	<!-- 	                android:layout_margin="5dp" -->
+	<!-- 	                android:textSize="20sp" -->
+	<!-- 	                android:text="twitter" -->
+	<!-- 	                />     -->
+	<!-- 	</LinearLayout> -->
+	    
+	<!-- 	<LinearLayout -->
+	<!-- 	        android:layout_width="fill_parent" -->
+	<!-- 	        android:layout_height="0dp" -->
+	<!-- 	        android:layout_weight="1" -->
+	<!-- 	        android:orientation="vertical" -->
+	<!-- 	        android:id="@+id/adlinearlayout" -->
+	<!-- 	        android:background="@color/greenmain"  -->
+	<!-- 	        > -->
+	<!-- 	    </LinearLayout>     -->
+	</LinearLayout>
+	<ImageView 
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/time_center_round"
+        >
+    </ImageView>
+    <ImageView 
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/time_center_round_center"
+        >
+    </ImageView>
+    <LinearLayout 
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >    
+        <TextView 
+            android:layout_width="fill_parent"
+        	android:layout_height="fill_parent"
+        	android:gravity="center"
+        	android:textColor="@color/white1"
+        	android:textSize="30sp"
+        	android:id="@+id/score"
+        	android:text="444"
+            />
+        
+    </LinearLayout>
+    
+</RelativeLayout>
+    
