@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Let\'s Go Math</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="score">Score: </string>
+    <string name="highscore"> Highscore: </string>
+    <string name="hint">Hint: Find the number that is sum of the other 3 numbers. Easy, right? </string>
+    <string name="startgame">Let the game begin!</string>
+    <string name="exit">I quit \n :\'(</string>
+
+</resources>
