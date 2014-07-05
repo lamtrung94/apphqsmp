@@ -1,5 +1,6 @@
-package lx.tung.letsgomath;
+package lx.tung.letsgomathwear;
 
+import lx.tung.letsgomath.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;

@@ -1,4 +1,4 @@
-package lx.tung.letsgomath;
+package lx.tung.letsgomathwear;
 
 public class TheList {
 	private int[] theList;

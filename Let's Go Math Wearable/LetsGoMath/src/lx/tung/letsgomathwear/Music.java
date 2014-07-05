@@ -1,4 +1,4 @@
-package lx.tung.letsgomath;
+package lx.tung.letsgomathwear;
 import android.content.Context;
 import android.media.MediaPlayer;
 
