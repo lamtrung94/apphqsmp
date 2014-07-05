@@ -80,7 +80,7 @@
 		                android:layout_height="wrap_content"
 		                android:background="@drawable/number01"
 		                android:id="@+id/number01"
-		                android:textColor="@color/greenmain"
+		                android:textColor="@color/orangeyellow"
 		                android:textSize="50sp"
 		                android:text="1"
 		                />
@@ -90,7 +90,7 @@
 		                android:layout_height="wrap_content"
 		                android:background="@drawable/number02"
 		                android:id="@+id/number02"
-		                android:textColor="@color/greenmain"
+		                android:textColor="@color/orangeyellow"
 		                android:textSize="50sp"
 		                android:text="10"
 		                />
@@ -109,7 +109,7 @@
 		                android:layout_height="wrap_content"
 		                android:background="@drawable/number03"
 		                android:id="@+id/number03"
-		                android:textColor="@color/greenmain"
+		                android:textColor="@color/orangeyellow"
 		                android:textSize="50sp"
 		                android:text="3"
 		                />
@@ -119,7 +119,7 @@
 		                android:layout_height="wrap_content"
 		                android:background="@drawable/number04"
 		                android:id="@+id/number04"
-		                android:textColor="@color/greenmain"
+		                android:textColor="@color/orangeyellow"
 		                android:textSize="50sp"
 		                android:text="40"
 		                />

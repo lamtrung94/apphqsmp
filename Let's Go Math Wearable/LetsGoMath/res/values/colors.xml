@@ -8,5 +8,7 @@
     <color name="silver">#e0e0e0</color>
     <color name="transparent">#00000000</color>
     <color name="greenmain">#019D49</color>
+    <color name="yellowgreenmain">#ffff66</color>
+    <color name="orangeyellow">#ff9900</color>
     <color name="Red1">#fe1313</color>
 </resources>
