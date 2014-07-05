@@ -42,7 +42,7 @@ public class HighScoreScreen extends Activity implements OnClickListener {
 		score = (TextView)findViewById(R.id.score);
 		score.setTypeface(System.tfCartoonShout);
 		
-		score.setText("Result: " + System.score + "\nHighscore: " + System.HIGH_SCORE);
+		score.setText("Result: " + System.CURRENT_SCORE + "\nHighscore: " + System.HIGH_SCORE);
 		
 		replay = (Button) findViewById(R.id.btnReplay);
 		replay.setOnClickListener(this);

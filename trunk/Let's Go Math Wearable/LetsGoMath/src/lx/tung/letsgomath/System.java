@@ -10,7 +10,7 @@ public class System {
 	public static Typeface tfComicSerifPro;
 	public static Typeface tfCartoonShout;
 	public static final String FILENAME = "result.txt";
-//	public static int CURRENT_SCORE = 0;
+	public static int CURRENT_SCORE = 0;
 	public static int HIGH_SCORE = 0;
 	public static long timeleft = 0;
 	

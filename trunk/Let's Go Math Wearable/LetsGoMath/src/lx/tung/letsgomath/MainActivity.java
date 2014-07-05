@@ -165,6 +165,7 @@ public class MainActivity extends Activity implements OnClickListener {
 //			txtResult.setTextColor(getResources().getColor(R.color.black));
 		}else if(System.status == System._STATUS_FAIL)
 		{
+			System.CURRENT_SCORE = System.score;
 			Intent intent = new Intent(this, HighScoreScreen.class);
 			startActivity(intent);
 			this.finish();
@@ -186,6 +187,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			System.status = System._STATUS_INIT;
 		}else if(System.status == System._STATUS_TIME_OUT)
 		{
+			System.CURRENT_SCORE = System.score;
 			Intent intent = new Intent(this, HighScoreScreen.class);
 			startActivity(intent);
 			this.finish();
@@ -291,6 +293,54 @@ public class MainActivity extends Activity implements OnClickListener {
 		     public void onTick(long millisUntilFinished) {
 //		    	 clock.setX((int) Math.floor(initFinishPos + initWidth * (millisUntilFinished/(finalTimer*1000))));
 		    	 System.timeleft = (long) Math.floor(millisUntilFinished);
+		    	 double portionTime = System.timeleft/(finalTimer*1000);
+		    	 Log.d("portionTime", Double.toString(portionTime));
+		    	 if (portionTime > 3/4){
+		    		 btnNumber01.setBackground(getResources().getDrawable(R.drawable.number01));
+		    		 btnNumber02.setBackground(getResources().getDrawable(R.drawable.number02));
+		    		 btnNumber03.setBackground(getResources().getDrawable(R.drawable.number03));
+		    		 btnNumber04.setBackground(getResources().getDrawable(R.drawable.number04));
+		    		 btnNumber01.setTextColor(getResources().getColor(R.color.orangeyellow));
+		    		 btnNumber02.setTextColor(getResources().getColor(R.color.orangeyellow));
+		    		 btnNumber03.setTextColor(getResources().getColor(R.color.orangeyellow));
+		    		 btnNumber04.setTextColor(getResources().getColor(R.color.orangeyellow));
+		    	 }else if (portionTime > 1/2){
+		    		 btnNumber01.setBackground(getResources().getDrawable(R.drawable.number01_timeout));
+		    		 btnNumber02.setBackground(getResources().getDrawable(R.drawable.number02));
+		    		 btnNumber03.setBackground(getResources().getDrawable(R.drawable.number03));
+		    		 btnNumber04.setBackground(getResources().getDrawable(R.drawable.number04));
+		    		 btnNumber01.setTextColor(getResources().getColor(R.color.white1));
+		    		 btnNumber02.setTextColor(getResources().getColor(R.color.orangeyellow));
+		    		 btnNumber03.setTextColor(getResources().getColor(R.color.orangeyellow));
+		    		 btnNumber04.setTextColor(getResources().getColor(R.color.orangeyellow));
+		    	 }else if (portionTime > 1/4){
+		    		 btnNumber01.setBackground(getResources().getDrawable(R.drawable.number01_timeout));
+		    		 btnNumber02.setBackground(getResources().getDrawable(R.drawable.number02_timeout));
+		    		 btnNumber03.setBackground(getResources().getDrawable(R.drawable.number03));
+		    		 btnNumber04.setBackground(getResources().getDrawable(R.drawable.number04));
+		    		 btnNumber01.setTextColor(getResources().getColor(R.color.white1));
+		    		 btnNumber02.setTextColor(getResources().getColor(R.color.white1));
+		    		 btnNumber03.setTextColor(getResources().getColor(R.color.orangeyellow));
+		    		 btnNumber04.setTextColor(getResources().getColor(R.color.orangeyellow));
+		    	 }else if (portionTime > 1/8){
+		    		 btnNumber01.setBackground(getResources().getDrawable(R.drawable.number01_timeout));
+		    		 btnNumber02.setBackground(getResources().getDrawable(R.drawable.number02_timeout));
+		    		 btnNumber03.setBackground(getResources().getDrawable(R.drawable.number03_timeout));
+		    		 btnNumber04.setBackground(getResources().getDrawable(R.drawable.number04));
+		    		 btnNumber01.setTextColor(getResources().getColor(R.color.white1));
+		    		 btnNumber02.setTextColor(getResources().getColor(R.color.white1));
+		    		 btnNumber03.setTextColor(getResources().getColor(R.color.white1));
+		    		 btnNumber04.setTextColor(getResources().getColor(R.color.orangeyellow));
+		    	 }else {
+		    		 btnNumber01.setBackground(getResources().getDrawable(R.drawable.number01_timeout));
+		    		 btnNumber02.setBackground(getResources().getDrawable(R.drawable.number02_timeout));
+		    		 btnNumber03.setBackground(getResources().getDrawable(R.drawable.number03_timeout));
+		    		 btnNumber04.setBackground(getResources().getDrawable(R.drawable.number04_timeout));
+		    		 btnNumber01.setTextColor(getResources().getColor(R.color.white1));
+		    		 btnNumber02.setTextColor(getResources().getColor(R.color.white1));
+		    		 btnNumber03.setTextColor(getResources().getColor(R.color.white1));
+		    		 btnNumber04.setTextColor(getResources().getColor(R.color.white1));
+		    	 } 
 		    	 //timerLine.setLayoutParams(new LayoutParams((int) Math.floor(initWidth * (millisUntilFinished/(finalTimer*1000))), timerLine.getLayoutParams().height));
 //		    	 timerLine.getLayoutParams().width = (int) Math.floor(initWidth * (millisUntilFinished/(finalTimer*1000)));
 		     }
