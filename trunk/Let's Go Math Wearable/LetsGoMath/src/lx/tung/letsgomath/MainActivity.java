@@ -294,8 +294,7 @@ public class MainActivity extends Activity implements OnClickListener {
 //		    	 clock.setX((int) Math.floor(initFinishPos + initWidth * (millisUntilFinished/(finalTimer*1000))));
 		    	 System.timeleft = (long) Math.floor(millisUntilFinished);
 		    	 double portionTime = System.timeleft/(finalTimer*1000);
-		    	 Log.d("portionTime", Double.toString(portionTime));
-		    	 if (portionTime > 3/4){
+		    	 if (portionTime > 0.75){
 		    		 btnNumber01.setBackground(getResources().getDrawable(R.drawable.number01));
 		    		 btnNumber02.setBackground(getResources().getDrawable(R.drawable.number02));
 		    		 btnNumber03.setBackground(getResources().getDrawable(R.drawable.number03));
@@ -304,7 +303,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		    		 btnNumber02.setTextColor(getResources().getColor(R.color.orangeyellow));
 		    		 btnNumber03.setTextColor(getResources().getColor(R.color.orangeyellow));
 		    		 btnNumber04.setTextColor(getResources().getColor(R.color.orangeyellow));
-		    	 }else if (portionTime > 1/2){
+		    	 }else if (portionTime > 0.5){
 		    		 btnNumber01.setBackground(getResources().getDrawable(R.drawable.number01_timeout));
 		    		 btnNumber02.setBackground(getResources().getDrawable(R.drawable.number02));
 		    		 btnNumber03.setBackground(getResources().getDrawable(R.drawable.number03));
@@ -313,7 +312,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		    		 btnNumber02.setTextColor(getResources().getColor(R.color.orangeyellow));
 		    		 btnNumber03.setTextColor(getResources().getColor(R.color.orangeyellow));
 		    		 btnNumber04.setTextColor(getResources().getColor(R.color.orangeyellow));
-		    	 }else if (portionTime > 1/4){
+		    	 }else if (portionTime > 0.25){
 		    		 btnNumber01.setBackground(getResources().getDrawable(R.drawable.number01_timeout));
 		    		 btnNumber02.setBackground(getResources().getDrawable(R.drawable.number02_timeout));
 		    		 btnNumber03.setBackground(getResources().getDrawable(R.drawable.number03));
@@ -322,7 +321,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		    		 btnNumber02.setTextColor(getResources().getColor(R.color.white1));
 		    		 btnNumber03.setTextColor(getResources().getColor(R.color.orangeyellow));
 		    		 btnNumber04.setTextColor(getResources().getColor(R.color.orangeyellow));
-		    	 }else if (portionTime > 1/8){
+		    	 }else if (portionTime > 0.125){
 		    		 btnNumber01.setBackground(getResources().getDrawable(R.drawable.number01_timeout));
 		    		 btnNumber02.setBackground(getResources().getDrawable(R.drawable.number02_timeout));
 		    		 btnNumber03.setBackground(getResources().getDrawable(R.drawable.number03_timeout));
