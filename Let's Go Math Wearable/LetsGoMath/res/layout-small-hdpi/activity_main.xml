@@ -107,7 +107,7 @@
 		            <Button
 		                android:layout_width="wrap_content"
 		                android:layout_height="wrap_content"
-		                android:background="@drawable/number03"
+		                android:background="@drawable/number04"
 		                android:id="@+id/number03"
 		                android:textColor="@color/orangeyellow"
 		                android:textSize="50sp"
@@ -117,7 +117,7 @@
 		            <Button
 		                android:layout_width="wrap_content"
 		                android:layout_height="wrap_content"
-		                android:background="@drawable/number04"
+		                android:background="@drawable/number03"
 		                android:id="@+id/number04"
 		                android:textColor="@color/orangeyellow"
 		                android:textSize="50sp"
