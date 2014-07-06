@@ -16,6 +16,7 @@
 
 package shop.hqsmp.mathwear;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -91,6 +92,11 @@ public class ScreenSlidePageFragment extends Fragment {
 			((ImageView) rootView.findViewById(R.id.imgTuto))
 					.setImageResource(R.drawable.tuto_time_out);
 		}
+			break;
+		case 3:
+			Intent i = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+			startActivity(i);
+			this.getActivity().finish();
 			break;
 		}
 		return rootView;
