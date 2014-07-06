@@ -64,7 +64,6 @@ public class MainActivity extends Activity implements OnClickListener {
 //		AddAd();
 		System.status = System._STATUS_INIT;
 		FillData();
-		
 	}
 
 	private void Init()

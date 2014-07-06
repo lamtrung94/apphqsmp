@@ -60,8 +60,9 @@ public class StartScreen extends Activity implements OnClickListener {
 	public void onClick(View arg0) {
 		if(arg0.getId()==R.id.btnStart)
 		{
-			Intent intent = new Intent(this, MainActivity.class);
-			startActivity(intent);
+//			Intent intent = new Intent(this, MainActivity.class);
+//			startActivity(intent);
+			startActivity(new Intent(getApplicationContext(), ScreenSlideActivity.class));
 		}
 //		else if(arg0.getId()==R.id.btnQuit)
 //		{
