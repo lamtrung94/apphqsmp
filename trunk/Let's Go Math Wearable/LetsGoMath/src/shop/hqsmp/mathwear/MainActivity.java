@@ -1,4 +1,4 @@
-package lx.tung.letsgomathwear;
+package shop.hqsmp.mathwear;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-
-import lx.tung.letsgomath.R;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,7 +26,6 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
