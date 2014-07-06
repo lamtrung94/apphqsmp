@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="lx.tung.letsgomath"
+    package="shop.hqsmp.mathwear"
     android:versionCode="2"
     android:versionName="1.0.1" >
 
@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="lx.tung.letsgomathwear.StartScreen"
+            android:name="shop.hqsmp.mathwear.StartScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar">
@@ -29,14 +29,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="lx.tung.letsgomathwear.MainActivity"
+            android:name="shop.hqsmp.mathwear.MainActivity"
             android:label="@string/app_name" 
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar"
             >
         </activity>
         <activity
-            android:name="lx.tung.letsgomathwear.HighScoreScreen"
+            android:name="shop.hqsmp.mathwear.HighScoreScreen"
             android:label="@string/app_name" 
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar"

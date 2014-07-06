@@ -1,4 +1,4 @@
-package lx.tung.letsgomathwear;
+package shop.hqsmp.mathwear;
 
 public class TheList {
 	private int[] theList;
