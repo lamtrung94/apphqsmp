@@ -1,0 +1,5 @@
+<wearableApp package="shop.hqsmp.mathwear">
+  <versionCode>3</versionCode>
+  <versionName>1.0.2</versionName>
+  <path>wear/LetsGoMathWearable.apk</path>
+</wearableApp>
