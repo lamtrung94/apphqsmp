@@ -2,13 +2,57 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="5dp" 
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    >
+    
 	<Button
-	    android:id="@+id/btnSOS"
+	    android:id="@+id/btnSOS1"
 	    android:layout_width="match_parent"
-	    android:layout_height="match_parent"
-	    android:text="SOS"
-	    android:textSize="50sp"
+	    android:layout_height="0dp"
+	    android:layout_weight="2"
+	    android:text="SOS1"
+	    android:textSize="30sp"
+	    android:textColor="@color/white1"
+	    android:background="@color/brightredoranage"
+	    android:layout_marginBottom="2dp"
 	    ></Button>    
+	<Button
+	    android:id="@+id/btnSOS2"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="2"
+	    android:text="SOS2"
+	    android:textSize="30sp"
+	    android:textColor="@color/white1"
+	    android:background="@color/pearlviolet"
+	    android:layout_marginTop="3dp"
+	    android:layout_marginBottom="2dp"
+	    ></Button>
+	<Button
+	    android:id="@+id/btnSOS3"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="2"
+	    android:text="SOS3"
+	    android:textSize="30sp"
+	    android:textColor="@color/white1"
+	    android:background="@color/pastelblue"
+	    android:layout_marginTop="3dp"
+	    android:layout_marginBottom="2dp"
+	    ></Button>
+	<Button
+	    android:id="@+id/btnSettings"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:text="Settings"
+	    android:layout_weight="1"
+	    android:textSize="30sp"
+	    android:textColor="@color/white1"
+	    android:background="@color/greenButtonGooglePlay"
+	    android:layout_marginTop="7dp"
+	    ></Button>
 
 </LinearLayout>

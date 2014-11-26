@@ -1,5 +1,10 @@
 <resources>
 
-    <string name="app_name">MySOS</string>
+    <string name="app_name">My SOS</string>
+    <string name="setting_title">Setup here</string>
+    <string name="phonenum1">PHONE NUM 01</string>
+    <string name="phonenum2">PHONE NUM 02</string>
+    <string name="phonenum3">PHONE NUM 03</string>
+    <string name="settings">Settings</string>
 
 </resources>

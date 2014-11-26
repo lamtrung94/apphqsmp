@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="lx.tung"
+    package="lx.tung.mysos"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -18,16 +18,27 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="lx.tung.MainActivity"
+            android:name="lx.tung.mysos.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar">
+            android:theme="@style/CustomTheme"
+            android:launchMode="singleInstance"
+            >
              
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        
+        <activity
+            android:name="lx.tung.mysos.SettingsScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomTheme"
+            android:launchMode="singleInstance"
+            >
         </activity>
         
         <receiver android:name="WidgetActivity" >

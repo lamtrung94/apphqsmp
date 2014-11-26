@@ -10,11 +10,18 @@
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         -->
+        <item name="android:windowTitleSize">50dp</item>
     </style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:windowTitleSize">50dp</item>
+    </style>
+    
+    <style name="CustomTheme" parent="android:style/Theme.Light">
+        <item name="android:windowTitleSize">50dp</item>        
+        <item name="android:windowTitleBackgroundStyle">@color/salmonpink</item>
     </style>
 
 </resources>

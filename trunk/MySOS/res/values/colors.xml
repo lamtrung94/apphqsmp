@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="gray">#515151</color>
+    <color name="WhiteSmoke">#F5F5F5</color>
+    <color name="gray2">#d7d7d7</color>
+    <color name="gray4">#666666</color>
+    <color name="gray1">#676767</color>
+    <color name="white">#e6e6e6</color>
+    <color name="white1">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="blue">#0067b2</color>
+    <color name="Red">#B2080C</color>
+    <color name="Red1">#fe1313</color>    
+    <color name="silver">#e0e0e0</color>
+    <color name="LightCyan">#d3feea</color>
+    <color name="pressed_button_background">#337293</color>
+     <color name="transparent">#00000000</color>
+     <color name="homepagetitle">#00A0DF</color>
+     <color name="bluemain">#00A0DF</color>
+     <color name="bluetab">#1894c6</color>
+     <color name="vietinName">#555555</color>
+     <color name="selectedtab">#B02433</color>
+	<color name="solid">#F7F7F7</color>
+	<color name="grey5">#DDDDDD</color>
+	<color name="green">#66CD00</color>
+	<color name="greenButtonGooglePlay">#669f36</color>
+	<color name="salmonpink">#d94335</color>
+	<color name="pastelblue">#00bfa4</color>
+	<color name="pearlviolet">#9375cb</color>
+	<color name="brightredoranage">#fe6d3f</color>
+</resources>
