@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="app_name">My SOS</string>
+    <string name="setting_title">Cài đặt</string>
+    <string name="phonenum1">SỐ ĐIỆN THOẠI LIÊN HỆ 01</string>
+    <string name="phonenum2">SỐ ĐIỆN THOẠI LIÊN HỆ 02</string>
+    <string name="phonenum3">SỐ ĐIỆN THOẠI LIÊN HỆ 03</string>
+    <string name="settings">Thiết lập</string>
+
+</resources>

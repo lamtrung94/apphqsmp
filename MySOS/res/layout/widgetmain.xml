@@ -8,6 +8,8 @@
 	    android:layout_height="match_parent"
 	    android:text="SOS"
 	    android:id="@+id/sosButton"
+	    android:background="@color/brightredoranage"
+	    android:textColor="@color/white1"
 	    />
 	   
 
