@@ -29,4 +29,12 @@
 	<color name="pastelblue">#00bfa4</color>
 	<color name="pearlviolet">#9375cb</color>
 	<color name="brightredoranage">#fe6d3f</color>
+	<color name="green700">#388e3c</color>
+	<color name="red700">#D32F2F</color>
+	<color name="accent_orange400">#FF9100</color>
+	<color name="accent_purple400">#D500F9</color>
+	<color name="accent_cyan400">#00E5FF</color>
+	<color name="accent_green400">#00E676</color>
+	<color name="accent_red400">#FF1744</color>
+	
 </resources>

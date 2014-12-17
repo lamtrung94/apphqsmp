@@ -5,6 +5,18 @@
     android:layout_height="match_parent"
     android:paddingBottom="10dp"
     >
+    <TextView
+        android:layout_width="match_parent"
+    	android:layout_height="72dp"
+    	android:text="Settings"
+    	android:textColor="@color/white1"
+    	android:background="@color/red700"
+    	android:gravity="center_vertical"
+    	android:paddingLeft="72dp"
+    	android:textSize="24sp"
+    	android:id="@+id/topTv"
+        />
+    
     <Button
         android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
@@ -24,6 +36,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@id/acceptBtn"
+        android:layout_below="@id/topTv"
         >
         <LinearLayout
             android:layout_width="fill_parent"

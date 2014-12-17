@@ -6,5 +6,123 @@
     <string name="phonenum2">PHONE NUM 02</string>
     <string name="phonenum3">PHONE NUM 03</string>
     <string name="settings">Settings</string>
-
+    <string name="booklets">Booklets</string>
+	<!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item >Home</item>
+        <item >Emergency Booklet</item>
+        <item >Settings</item>
+        <item >Help and Support</item>
+    </string-array>
+    
+    <array name="nav_drawer_icons">
+        <item>@drawable/alarmicon</item>
+        <item>@drawable/alarmicon</item>
+        <item>@drawable/alarmicon</item>
+        <item>@drawable/alarmicon</item>
+    </array>
+    
+    <!-- First aid -->
+    <!-- Titles -->
+    <string-array name="fa_titles">
+        <item>Đột quỵ</item>
+        <item>Ngộ độc thực phẩm</item>
+    	<item>Vết thương chảy máu</item>
+    	<item>Bỏng</item>
+	</string-array>  
+    
+    <!-- Contents -->
+    <string-array name="fa_contents">
+    	<item>
+			Đột quỵ! Xảy ra khi có chảy máu não hoặc khi lưu lượng máu bình thường tới não bị chặn lại...Các yếu tố rủi ro đối với đột quỵ gồm có tăng huyết áp, bị đột quỵ trước đó, hút thuốc lá, có bệnh tiểu đường và có bệnh tim...\n
+			Đột quỵ xảy ra khi có chảy máu não hoặc khi lưu lượng máu bình thường tới não bị chặn lại. Trong vòng vài phút bị tước đoạt các chất dinh dưỡng thiết yếu, các tế bào não bắt đầu chết, một quá trình có thể tiếp tục trong vài giờ tới.\n
+			Đột quỵ là một trường hợp khẩn cấp đúng sự thật. Việc điều trị sớm hơn được đưa ra, nhiều khả năng thiệt hại có thể được giảm thiểu.\n
+			Các dấu hiệu và triệu chứng của một cơn đột quỵ bao gồm:\n
+			- Yếu hoặc tê ở mặt, tay hoặc chân ở một bên của cơ thể.\n
+			- Nhìn mờ đột ngột, mất thị giác, đặc biệt là ở một mắt.\n
+			- Thất ngôn, khó nói.\n
+			- Đột ngột đau đầu không có nguyên nhân rõ ràng.\n
+			- Không giải thích được chóng mặt, đứng không vững, đặc biệt là nếu kèm theo bất kỳ dấu hiệu hoặc triệu chứng khác.\n
+			Các yếu tố rủi ro đối với đột quỵ gồm có tăng huyết áp, bị đột quỵ trước đó, hút thuốc lá, có bệnh tiểu đường và có bệnh tim. Nguy cơ đột quỵ cũng tăng lên theo độ tuổi.\n
+			(Nguồn: dieutri.vn)
+		</item>
+		<item>
+			Ngộ độc thực phẩm! Tất cả các loại thực phẩm tự nhiên chứa một lượng nhỏ vi khuẩn, xử lý thực phẩm không tốt, nấu ăn không đúng hoặc lưu trữ không đảm bảo có thể dẫn đến vi khuẩn nhân lên với số lượng đủ lớn để gây bệnh...\n
+			Tất cả các loại thực phẩm tự nhiên chứa một lượng nhỏ vi khuẩn. Nhưng xử lý thực phẩm không tốt, nấu ăn không đúng cách hoặc lưu trữ không đảm bảo có thể dẫn đến vi khuẩn nhân lên với số lượng đủ lớn để gây bệnh. Ký sinh trùng, vi rút, chất độc và hóa chất cũng có thể làm ô nhiễm thực phẩm và gây ra bệnh tật.\n
+			Các dấu hiệu và triệu chứng của ngộ độc thực phẩm khác nhau với các nguồn ô nhiễm.\n
+			Biểu hiện thông thường bao gồm\n
+			- Tiêu chảy.\n
+			- Buồn nôn.\n
+			- Đau bụng.\n
+			- Nôn (đôi khi).\n
+			- Mất nước (đôi khi).\n
+			Với mất nước đáng kể, có thể cảm thấy\n
+			- Choáng hoặc ngất xỉu, đặc biệt là tư thế đứng.\n
+			- Nhịp tim nhanh.\n
+			Cho dù bị bệnh sau khi ăn thực phẩm bị ô nhiễm, tình trạng bệnh phụ thuộc vào cơ thể, lượng ăn vào, độ tuổi và sức khỏe.\n
+			Nhóm nguy cơ cao bao gồm\n
+			- Người cao tuổi. Khi có tuổi, hệ miễn dịch không thể đáp ứng một cách nhanh chóng và một cách hiệu quả với các sinh vật truyền nhiễm như người trẻ hơn.\n
+			- Trẻ sơ sinh và trẻ nhỏ. Hệ thống miễn dịch chưa phát triển đầy đủ.\n
+			- Người có bệnh mãn tính. Có một tình trạng mãn tính như bệnh tiểu đường hoặc AIDS, hoặc điều trị hóa trị hoặc xạ trị liệu ung thư làm giảm phản ứng miễn dịch.\n
+			Nếu bị ngộ độc thực phẩm\n
+			- Nghỉ ngơi và uống nhiều chất lỏng.\n
+			- Không sử dụng thuốc chống tiêu chảy, vì có thể làm chậm việc loại bỏ vi khuẩn khỏi hệ thống tiêu hóa.\n
+			- Ngộ độc thực phẩm sẽ cải thiện trong vòng 48 giờ. Gọi bác sĩ nếu cảm thấy ốm dài hơn hai hoặc ba ngày hoặc nếu máu xuất hiện trong phân.\n
+			Gọi trợ giúp khẩn cấp y tế nếu\n
+			- Có triệu chứng trầm trọng, chẳng hạn như tiêu chảy lỏng mà lẫn máu trong vòng 24 giờ.\n
+			- Thuộc về một nhóm nguy cơ cao.\n
+			Nghi ngờ ngộ độc độc tố. Một ngộ độc thực phẩm có khả năng gây tử vong là kết quả từ một độc tố hình thành bởi các bào tử nhất định trong thực phẩm. Ngộ độc độc tố thường được tìm thấy trong thực phẩm đóng lon, đặc biệt là đậu xanh và cà chua. Các dấu hiệu và triệu chứng của bệnh ngộ độc thường bắt đầu 12 - 36 giờ sau khi ăn thức ăn bị ô nhiễm và có thể bao gồm đau đầu, mờ mắt, yếu cơ và cuối cùng là liệt. Một số người cũng có buồn nôn và nôn, táo bón, bí tiểu, khó thở và khô miệng.\n
+			(Nguồn: dieutri.vn)
+		</item>
+		<item>
+		    Vết thương chảy máu! Không đặt lại vị trí các cơ quan đã dời. Nếu vết thương là bụng và các cơ quan đã được di dời, không cố gắng để đẩy nó về chỗ cũ. Nếu chảy máu nghiêm trọng, đặt người nằm xuống...\n
+			Nếu có thể, trước khi cố gắng để cầm máu hãy rửa tay để tránh nhiễm trùng và sử dụng găng tay. Không được đặt lại vị trí các cơ quan đã dời. Nếu vết thương là bụng và các cơ quan đã được di dời, không cố gắng để đẩy nó về chỗ cũ.\n
+			Đối với các trường hợp khác có chảy máu nghiêm trọng, làm theo các bước sau\n
+			- Đặt người bị thương nằm xuống. Nếu có thể, vị trí đầu hơi thấp hơn thân hoặc nâng cao chân. Vị trí này làm giảm nguy cơ ngất bằng cách tăng lượng máu đến não. Nếu có thể, nâng cao vị trí chảy máu.\n
+			- Khi đã đeo găng tay, hãy loại bỏ chất bẩn bất kỳ hoặc các mảnh vụn từ các vết thương. Không thăm dò vết thương hoặc cố để làm sạch nơi sâu của vết thương vào thời điểm này. Mối quan tâm chính là cầm máu.\n
+			- Áp dụng áp lực trực tiếp lên vết thương cho đến khi máu ngừng chảy. Sử dụng một băng vô trùng hoặc vải sạch và giữ áp lực liên tục trong ít nhất 20 phút mà không mở ra tìm kiếm xem máu đã ngừng chảy. Duy trì áp lực bằng cách buộc chặt vết thương bằng băng (hay một miếng vải sạch) và băng dính. Sử dụng tay nếu không có gì khác có sẵn. Nếu có thể, đeo găng tay cao su hoặc sử dụng một túi nhựa sạch để bảo vệ.\n
+			- Không tháo băng gạc. Nếu vẫn tiếp tục chảy máu và thấm qua gạc hoặc vật liệu khác đang đắp nó lên vết thương, không loại bỏ nó. Thay vào đó, thêm nhiều vật liệu hấp thụ lên trên nó.\n
+			- Bóp động mạch chính nếu cần thiết. Nếu máu không ngừng chảy với áp lực trực tiếp, áp dụng áp lực với động mạch cung cấp máu đến khu vực của vết thương. Điểm áp lực của cánh tay là bên trong của cánh tay ngay trên khuỷu tay và ngay dưới nách. Điểm áp lực của chân là phía sau đầu gối và ở háng. Giữ ngón tay phẳng lên vị trí cần bóp mạch, bàn tay kia tiếp tục tạo áp lực trên các vết thương.\n
+			- Bất động phần cơ thể bị thương khi đã ngừng chảy máu. Để lại các băng tại chỗ và đưa người bị thương vào phòng cấp cứu càng sớm càng tốt.\n
+			- Nếu nghi ngờ chảy máu bên trong, hãy gọi số khẩn cấp y tế.\n
+			Các dấu hiệu chảy máu bên trong có thể bao gồm\n
+			- Chảy máu từ hốc cơ thể, chẳng hạn như tai, mũi, trực tràng hoặc âm đạo.\n
+			- Nôn hoặc ho ra máu.\n
+			- Bầm trên cổ, ngực, bụng hoặc bên hông (giữa các xương sườn và hông).\n
+			- Vết thương đã thâm nhập vào hộp sọ, lồng ngực hoặc bụng.\n
+			- Đau bụng, có thể kèm theo cứng hoặc co thắt cơ thành bụng.\n
+			- Gãy xương.\n
+			(Nguồn: dieutri.vn)
+		</item>
+		<item>
+		    Bỏng! Nốt bỏng nhỏ thường lành mà không cần điều trị thêm. Có thể chữa lành với những thay đổi sắc tố trên da, có nghĩa là khu vực chữa lành có thể có một màu sắc khác với da xung quanh...\n
+			Bước đầu tiên là xác định mức độ tổn thương đến các mô cơ thể. Ba mức độ chăm sóc bỏng được phân loại sẽ giúp xác định các bước để chăm sóc khẩn cấp.\n
+			Mức độ chăm sóc một\n
+			- Các nốt bỏng trong đó chỉ có lớp ngoài của da bị tổn thương. Da thường là màu đỏ, với sưng và đau đôi khi có mặt. Thái độ xử trí với bỏng như là một ghi nhận nhỏ mà không đòi hỏi gì thêm, trừ khi nó liên quan đến phần đáng kể của bàn tay, bàn chân, mặt, háng hay mông, hoặc một mảng lớn, đòi hỏi sự chú ý khẩn cấp y tế.\n
+			Mức độ chăm sóc hai\n
+			- Khi các lớp đầu tiên của da đã bị đốt cháy và lớp thứ hai của da (biểu bì) cũng bị tổn thương, thương tích này được chăm sóc ở mức độ hai. Mụn nước phát triển trên da ngày một mạnh mẽ và có mầu đỏ. Bỏng mức độ này sẽ có sưng và đau.\n
+			- Nếu diện tích không lớn hơn 7 - 8 cm đường kính, xử lý nó như là một bỏng nhỏ. Nếu diện tích bị bỏng lớn hơn hoặc nếu ở bàn tay, bàn chân, mặt, háng hay mông, hoặc mảng lớn, xử lý nó như là một bỏng lớn và nhận được trợ giúp y tế ngay lập tức.\n
+			- Đối với bỏng trẻ vị thành niên\n
+			- Bao gồm bỏng độ một và hai, giới hạn diện tích không lớn hơn 7 – 8 cm đường kính, hãy làm như sau đây.\n
+			- Làm lạnh nốt bỏng: Giữ diện tích bị bỏng dưới nước mát (không lạnh) đang  chảy trong 10 hoặc 15 phút hoặc cho đến khi cơn đau giảm. Nếu điều này không thực tế, nhúng nốt bỏng trong nước mát hoặc làm lạnh nó bằng áp lạnh. Làm mát vết bỏng sẽ làm giảm sưng nóng da. Không được để nước đá vào nốt bỏng.\n
+			- Bao phủ các nốt bỏng bằng băng gạc vô trùng: Không sử dụng vải bông có lông tơ. Quấn gạc lỏng lẻo để tránh áp lực lên vùng da bị bỏng.\n
+			- Thuốc giảm đau mua không cần toa: Chúng bao gồm aspirin, ibuprofen, naproxen hay acetaminophen. Cẩn thận khi dùng aspirin cho trẻ em hoặc thanh thiếu niên. Mặc dù aspirin được chấp thuận cho sử dụng ở trẻ lớn hơn 2 tuổi, nhưng trẻ em và thanh thiếu niên mới phục hồi từ bệnh thủy đậu hoặc các triệu chứng giống như cúm không bao giờ nên dùng aspirin. Hãy hỏi bác sĩ nếu có thắc mắc.\n
+			- Nốt bỏng nhỏ thường lành mà không cần điều trị thêm. Có thể chữa lành với những thay đổi sắc tố trên da, có nghĩa là khu vực chữa lành có thể có một màu sắc khác với da xung quanh. Theo dõi các dấu hiệu nhiễm trùng, chẳng hạn như đau tăng lên, tấy đỏ, sốt, sưng hoặc chảy nước. Nếu nhiễm trùng phát triển, hãy tìm kiếm sự trợ giúp y tế. Tránh bị thương lại nếu thời gian có tổn thương bỏng chưa tới một năm, như vậy có thể gây ra những thay đổi sắc tố rộng hơn. Hãy sử dụng kem chống nắng trên diện tích da bị bỏng ít nhất một năm sau đó.\n
+			Chú ý\n
+			* Không sử dụng nước đá trực tiếp: Đưa nước đá trực tiếp trên nốt bỏng có thể gây thiệt hại thêm cho vết thương.\n
+			* Không áp bơ hay thuốc mỡ: Điều này có thể gây nhiễm trùng.\n
+			* Không làm vỡ mụn nước: Làm vỡ mụn nước nguy cơ bị nhiễm trùng sẽ tăng.\n
+			Mức độ chăm sóc ba\n
+			- Là các nốt bỏng nghiêm trọng nhất liên quan đến tất cả các lớp của da và gây thiệt hại mô vĩnh viễn. Chất béo, cơ và thậm chí xương có thể bị ảnh hưởng. Khu vực bỏng có thể bị cháy đen hoặc xuất hiện khô và mầu trắng. Khó thở do ngộ độc khí carbon monoxide, hoặc các hiệu ứng độc hại khác có thể xảy ra nếu hít phải khói đi kèm với bỏng. Hãy nhanh chóng để nhận được trợ giúp y tế.\n
+			- Đối với bỏng lớn hãy gọi số khẩn cấp trợ giúp y tế\n
+			- Cho đến khi một đơn vị cấp cứu đến, hãy làm theo các ước sau\n
+			- Không loại bỏ quần áo bị cháy: Tuy nhiên, phải bảo đảm rằng nạn nhân không còn tiếp xúc với các vật liệu cháy âm ỉ hoặc tiếp xúc với khói hoặc nhiệt.\n
+			- Không nhúng bỏng lớn trong nước lạnh: Làm như vậy có thể làm giảm nhiệt độ cơ thể (thân nhiệt), giảm huyết áp và có thể sốc.\n
+			- Kiểm tra các dấu hiệu sống: Nếu không có hơi thở hoặc dấu hiệu sống khác, ngay lập tức bắt đầu cấp cứu tim phổi.\n
+			- Che phủ khu vực các nốt bỏng: Sử dụng vải ẩm hoặc khăn ẩm, băng vô trùng.\n
+			- Nhận một mũi tiêm uốn ván: Bỏng dễ bị bệnh uốn ván. Các bác sĩ khuyên nhận được một mũi tiêm uốn ván mỗi 10 năm. Nếu mũi tiêm cuối nhiều hơn năm năm trước, bác sĩ có thể đề nghị tiêm nhắc lại.\n
+			(Nguồn: dieutri.vn)
+		</item>    
+	</string-array>
+    
 </resources>

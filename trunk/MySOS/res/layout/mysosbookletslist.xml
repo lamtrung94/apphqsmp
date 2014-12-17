@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <TextView
+        android:layout_width="match_parent"
+    	android:layout_height="72dp"
+    	android:text="Booklets"
+    	android:textColor="@color/white1"
+    	android:background="@color/red700"
+    	android:gravity="center_vertical"
+    	android:paddingLeft="72dp"
+    	android:textSize="24sp"
+    	android:id="@+id/topTv"
+        />
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="#00000000"
+        android:scrollbars="none"
+        android:divider="@color/accent_red400"
+        android:dividerHeight="1dp"
+         />
+
+</LinearLayout>
