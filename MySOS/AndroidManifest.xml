@@ -18,7 +18,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="lx.tung.mysos.MainActivity"
+            android:name="lx.tung.mysos.activities.Home_Activity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/CustomTheme"
@@ -33,7 +33,25 @@
         </activity>
         
         <activity
-            android:name="lx.tung.mysos.SettingsScreen"
+            android:name="lx.tung.mysos.activities.Settings_Activity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomTheme"
+            android:launchMode="singleInstance"
+            >
+        </activity>
+        
+        <activity
+            android:name="lx.tung.mysos.activities.Booklets_List_Activity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomTheme"
+            android:launchMode="singleInstance"
+            >
+        </activity>
+        
+        <activity
+            android:name="lx.tung.mysos.activities.Booklet_Activity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/CustomTheme"
