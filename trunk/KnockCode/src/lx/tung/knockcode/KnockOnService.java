@@ -23,14 +23,12 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.os.PowerManager.WakeLock;
-import android.provider.Settings;
-import android.provider.Settings.SettingNotFoundException;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 public class KnockOnService extends Service {
 	static BroadcastReceiver mReceiver;
-	static int oldTimeOutTime;
+	
 	static SensorManager sensorManager = null;
 	static SensorEventListener aListener = null;
 	static int orientation = -1;
@@ -46,6 +44,9 @@ public class KnockOnService extends Service {
 		boolean screenOff = intent.getBooleanExtra("screen_state", false);
 		boolean knockOn = intent.getBooleanExtra("knockOn", false);
 		knockCode = readFromFile();
+		if(knockCode == null || "".equals(knockCode)){
+			knockCode="0000";
+		}
 		Log.d("KNOCK CODE:", knockCode);
 		Log.d("KnockOnService", "screenOff: " + screenOff);
 	    if (!screenOff) {
@@ -66,7 +67,6 @@ public class KnockOnService extends Service {
 	        	Log.d("KnockOnService", "wake screen release");
 	        	Log.d("KnockOnService","mHandler.removeCallbacks(mRunnable);");
 	        	wl.release();
-	        	Log.d("KnockOnService", "wl.release()");
 	        	wl = null;
 	        	if(KnockCodeBlackScreen.mHandler!=null && KnockCodeBlackScreen.mRunnable != null){
 	        		KnockCodeBlackScreen.mHandler.removeCallbacksAndMessages(null);
@@ -77,26 +77,13 @@ public class KnockOnService extends Service {
 	        }else{
 	        	if(KnockCodeBlackScreen.running == false && KnockOnBlackScreen.running == false){
 	        		PowerManager manager = (PowerManager) getSystemService(Context.POWER_SERVICE);
-	        		
-	        		try {
-						KnockOnService.oldTimeOutTime = android.provider.Settings.System.getInt(getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT);
-						android.provider.Settings.System.putInt(getContentResolver(),
-					            Settings.System.SCREEN_OFF_TIMEOUT, 1000);
-					} catch (SettingNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-	        		
-	        		
-//		        	manager.goToSleep(SystemClock.uptimeMillis());
+		        	manager.goToSleep(SystemClock.uptimeMillis());
 	        	}
 //	        	PowerManager manager = (PowerManager) getSystemService(Context.POWER_SERVICE);
 //	        	manager.goToSleep(SystemClock.uptimeMillis());
 	        }
 	    } else {
 	    	Log.d("KnockOnService", "sensorManager.register;");
-	    	android.provider.Settings.System.putInt(getContentResolver(),
-		            Settings.System.SCREEN_OFF_TIMEOUT, oldTimeOutTime);
 	    	sensorManager = (SensorManager) this.getSystemService(Context.SENSOR_SERVICE);
 		    aListener = new SensorEventListener() {
 	            int orientation=-1;
@@ -123,17 +110,19 @@ public class KnockOnService extends Service {
 	                    		i = new Intent(KnockOnService.this, KnockOnBlackScreen.class);
 	                    		Log.d("KnockOnService", "KnockOnBlackScreenIntent");
 	                    	}
-	            	    	i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-	            	        startActivity(i);
+	                    	
+	            	        
 	                    	PowerManager pm;
 	            	    	pm = (PowerManager) getSystemService(POWER_SERVICE);
 	            	    	wl = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK
 	            	    			| PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG");
 	            	    	wl.acquire();
-//	            	    	km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-//	            	    	km.newKeyguardLock("KEYGUARD").disableKeyguard();
+	            	    	km = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+	            	    	km.newKeyguardLock("KEYGUARD").disableKeyguard();
 	            	    	Log.d("KnockOnService", "wake screen acquire");
 	            	    	restartScreenOn = false;
+	            	    	i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	            	        startActivity(i);
 	            	    	
 	                    }
 	                    orientation=0;
