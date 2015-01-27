@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="D:\PersonalProject\AndroidstudioProjects\UETLinker\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="D:\PersonalProject\AndroidstudioProjects\UETLinker\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-7c93cac271257b62f221637c0239c6de30c820e6.jar" />
+    </item>
+    <item
+        jar="D:\PersonalProject\AndroidstudioProjects\UETLinker\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="D:\PersonalProject\AndroidstudioProjects\UETLinker\app\build\intermediates\pre-dexed\debug\classes-54245fad2b5677ea24853137e230d0b4183ad2c9.jar" />
+    </item>
+    <item
+        jar="D:\PersonalProject\AndroidstudioProjects\UETLinker\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="D:\PersonalProject\AndroidstudioProjects\UETLinker\app\build\intermediates\pre-dexed\debug\classes-429f90b857e9425592830afd63d70f8c8eb26d9c.jar" />
+    </item>
+    <item
+        jar="D:\l\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\21.0.3\support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="D:\PersonalProject\AndroidstudioProjects\UETLinker\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-05147bb4675ecb295e3cdad866bc9b73e53bf617.jar" />
+    </item>
+    <item
+        jar="D:\PersonalProject\AndroidstudioProjects\UETLinker\app\libs\jsoup-1.8.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3d57e95c0f150b885ccdbda7a12bef353fd31d02">
+        <dex dex="D:\PersonalProject\AndroidstudioProjects\UETLinker\app\build\intermediates\pre-dexed\debug\jsoup-1.8.1-939d15b45aa9b599b14018e13a57e96ce5c6a801.jar" />
+    </item>
+
+</items>
