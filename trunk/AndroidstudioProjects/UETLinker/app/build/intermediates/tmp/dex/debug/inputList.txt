@@ -1,0 +1,6 @@
+D:\PersonalProject\AndroidstudioProjects\UETLinker\app\build\intermediates\classes\debug
+D:\PersonalProject\AndroidstudioProjects\UETLinker\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-05147bb4675ecb295e3cdad866bc9b73e53bf617.jar
+D:\PersonalProject\AndroidstudioProjects\UETLinker\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-7c93cac271257b62f221637c0239c6de30c820e6.jar
+D:\PersonalProject\AndroidstudioProjects\UETLinker\app\build\intermediates\pre-dexed\debug\jsoup-1.8.1-939d15b45aa9b599b14018e13a57e96ce5c6a801.jar
+D:\PersonalProject\AndroidstudioProjects\UETLinker\app\build\intermediates\pre-dexed\debug\classes-54245fad2b5677ea24853137e230d0b4183ad2c9.jar
+D:\PersonalProject\AndroidstudioProjects\UETLinker\app\build\intermediates\pre-dexed\debug\classes-429f90b857e9425592830afd63d70f8c8eb26d9c.jar
