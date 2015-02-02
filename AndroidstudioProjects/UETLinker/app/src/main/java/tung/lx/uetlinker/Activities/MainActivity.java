@@ -1,6 +1,7 @@
 package tung.lx.uetlinker.Activities;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -20,12 +21,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Vector;
 
+import tung.lx.uetlinker.Constants;
+import tung.lx.uetlinker.Utils.Global;
 import tung.lx.uetlinker.Utils.LinkGetter;
 import tung.lx.uetlinker.Models.LinkObject;
 import tung.lx.uetlinker.NavigationDrawerFragment;
 import tung.lx.uetlinker.R;
+import tung.lx.uetlinker.Utils.Utils;
 
 
 public class MainActivity extends ActionBarActivity
@@ -45,11 +50,15 @@ public class MainActivity extends ActionBarActivity
 
     private TextView tv;
 
+    //private int endOfAnnouncement = 0, endOfExam = 0;
+
+    private int sidebarPos = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        sidebarPos = getIntent().getIntExtra("sidebarPos", 0);
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -60,15 +69,20 @@ public class MainActivity extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         tv = (TextView) findViewById(R.id.textView);
-        Initialize();
     }
 
-    private void Initialize(){
+    private void Initialize() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         getData();
-        String html = "All news:\n";
-        for (int i = 0; i < lsLinkObject.size(); i++){
+        String html = "<P><h1>Thông báo:</h1></P>";
+        if (sidebarPos == Constants.SIDEBAR_POS_EXAM) {
+            html = "<P><h1>Lịch thi:</h1></P>";
+        } else if (sidebarPos == Constants.SIDEBAR_POS_SCHEDULE) {
+            html = "<P><h1>Thời khóa biểu:</h1></P>";
+        }
+        for (int i = 0; i < lsLinkObject.size(); i++) {
+
             html += "<P><a href=\"" + lsLinkObject.get(i).getUrl() + "\">" + lsLinkObject.get(i).getTitle() + "</a></P>";
         }
         final Spanned displayList = Html.fromHtml(html);
@@ -76,15 +90,47 @@ public class MainActivity extends ActionBarActivity
         tv.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    private void getData(){
+    private void getData() {
+        SharedPreferences settings = getSharedPreferences(Constants.PREFS_NAME, 0);
+        List<String> keywordsList = Utils.getKeywordList(settings.getString("keywords", ""));
         LinkGetter aLinkGetter = new LinkGetter();
-        try {
 
-            lsLinkObject = aLinkGetter.getLink();
-            Toast.makeText(this, "Get data successfully!", Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            Toast.makeText(this, "Get data failed!", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
+        switch (Global.currentScreen) {
+            case Constants.SIDEBAR_POS_HOME:
+                if (Global.lsLinkObjectAnnouncement == null || Global.lsLinkObjectAnnouncement.size() == 0) {
+                    Utils.refreshData(this);
+                }
+                break;
+            case Constants.SIDEBAR_POS_EXAM:
+                if (Global.lsLinkObjectExam == null || Global.lsLinkObjectExam.size() == 0) {
+                    Utils.refreshData(this);
+                }
+                break;
+            case Constants.SIDEBAR_POS_SCHEDULE:
+                if (Global.lsLinkObjectSchedule == null || Global.lsLinkObjectSchedule.size() == 0) {
+                    Utils.refreshData(this);
+                }
+                break;
+        }
+
+
+        if (sidebarPos == Constants.SIDEBAR_POS_EXAM) {
+            lsLinkObject = Global.lsLinkObjectExam;
+        } else if (sidebarPos == Constants.SIDEBAR_POS_SCHEDULE) {
+            lsLinkObject = Global.lsLinkObjectSchedule;
+        } else {
+            lsLinkObject = Global.lsLinkObjectAnnouncement;
+        }
+        for (int i = 0; i < lsLinkObject.size(); i++) {
+            for (int j = 0; j < keywordsList.size(); j++) {
+                if (lsLinkObject.get(i).getTitle().trim().contains(keywordsList.get(j).trim())) {
+                    if(!"(*)".equals(lsLinkObject.get(i).getTitle().substring(0, 2)))
+                        lsLinkObject.get(i).setTitle("<b>(*)" + lsLinkObject.get(i).getTitle() + "</b>");
+                    else
+                        lsLinkObject.get(i).setTitle("<b>" + lsLinkObject.get(i).getTitle() + "</b>");
+                    Toast.makeText(this, "Keywords detected!", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     }
 
@@ -103,11 +149,15 @@ public class MainActivity extends ActionBarActivity
                 mTitle = getString(R.string.home_section);
                 break;
             case 2:
-                mTitle = getString(R.string.keywords_section);
+                mTitle = getString(R.string.exam_section);
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                mTitle = getString(R.string.schedule_section);
                 break;
+            case 4:
+                mTitle = getString(R.string.keywords_section);
+                break;
+
         }
     }
 

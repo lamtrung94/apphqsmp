@@ -1,17 +1,17 @@
 package tung.lx.uetlinker;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,7 +23,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import tung.lx.uetlinker.Activities.Keyword_Manager_Activity;
 import tung.lx.uetlinker.Activities.MainActivity;
+import tung.lx.uetlinker.Utils.Global;
+import tung.lx.uetlinker.Utils.LinkGetter;
+import tung.lx.uetlinker.Utils.Utils;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -106,8 +110,9 @@ public class NavigationDrawerFragment extends Fragment {
                 android.R.id.text1,
                 new String[]{
                         getString(R.string.home_section),
-                        getString(R.string.keywords_section),
-                        getString(R.string.title_section3),
+                        getString(R.string.exam_section),
+                        getString(R.string.schedule_section),
+                        getString(R.string.keywords_section)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -194,11 +199,33 @@ public class NavigationDrawerFragment extends Fragment {
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
-            if(position == 0){
-                Intent i = new Intent();
-                Toast.makeText(getActivity().getApplicationContext(), "Item 0 selected", Toast.LENGTH_LONG).show();
-                i.setClass(getActivity().getApplicationContext(), MainActivity.class);
-                startActivity(i);
+            switch(position){
+                case 0:
+                    Global.currentScreen = Constants.SIDEBAR_POS_HOME;
+                    Intent i = new Intent();
+                    i.setClass(getActivity().getApplicationContext(), MainActivity.class);
+                    i.putExtra("sidebarPos", Constants.SIDEBAR_POS_HOME);
+                    startActivity(i);
+                    break;
+                case 1:
+                    Global.currentScreen = Constants.SIDEBAR_POS_EXAM;
+                    i = new Intent();
+                    i.setClass(getActivity().getApplicationContext(), MainActivity.class);
+                    i.putExtra("sidebarPos", Constants.SIDEBAR_POS_EXAM);
+                    startActivity(i);
+                    break;
+                case 2:
+                    Global.currentScreen = Constants.SIDEBAR_POS_SCHEDULE;
+                    i = new Intent();
+                    i.setClass(getActivity().getApplicationContext(), MainActivity.class);
+                    i.putExtra("sidebarPos", Constants.SIDEBAR_POS_SCHEDULE);
+                    startActivity(i);
+                    break;
+                case 3:
+                    i = new Intent();
+                    i.setClass(getActivity().getApplicationContext(), Keyword_Manager_Activity.class);
+                    startActivity(i);
+                    break;
             }
         }
         if (mDrawerLayout != null) {
@@ -254,9 +281,32 @@ public class NavigationDrawerFragment extends Fragment {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
-        if (item.getItemId() == R.id.action_example) {
-            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
+        if (item.getItemId() == R.id.refresh_action) {
+            //Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
+            Utils.refreshData(getActivity().getApplicationContext());
+            switch(Global.currentScreen) {
+                case Constants.SIDEBAR_POS_HOME:
+                    Global.currentScreen = Constants.SIDEBAR_POS_HOME;
+                    Intent i = new Intent();
+                    i.setClass(getActivity().getApplicationContext(), MainActivity.class);
+                    i.putExtra("sidebarPos", Constants.SIDEBAR_POS_HOME);
+                    startActivity(i);
+                    break;
+                case Constants.SIDEBAR_POS_EXAM:
+                    Global.currentScreen = Constants.SIDEBAR_POS_EXAM;
+                    i = new Intent();
+                    i.setClass(getActivity().getApplicationContext(), MainActivity.class);
+                    i.putExtra("sidebarPos", Constants.SIDEBAR_POS_EXAM);
+                    startActivity(i);
+                    break;
+                case Constants.SIDEBAR_POS_SCHEDULE:
+                    Global.currentScreen = Constants.SIDEBAR_POS_SCHEDULE;
+                    i = new Intent();
+                    i.setClass(getActivity().getApplicationContext(), MainActivity.class);
+                    i.putExtra("sidebarPos", Constants.SIDEBAR_POS_SCHEDULE);
+                    startActivity(i);
+                    break;
+            }
             return true;
         }
 

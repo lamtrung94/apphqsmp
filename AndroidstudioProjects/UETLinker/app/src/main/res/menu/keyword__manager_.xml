@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="tung.lx.uetlinker.Activities.Keyword_Manager_Activity">
-    <item android:id="@+id/action_example" android:title="@string/action_example"
+    <item android:id="@+id/refresh_action" android:title="@string/refresh_action"
         android:showAsAction="withText|ifRoom" />
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" android:showAsAction="never" />

@@ -14,10 +14,10 @@ import tung.lx.uetlinker.Models.LinkObject;
  * Created by Tung on 1/26/2015.
  */
 public class LinkGetter {
-    public Vector<LinkObject> getLink() throws IOException {
+    public Vector<LinkObject> getLink(String URL) throws IOException {
         Vector<LinkObject> lsLinkObject = new Vector<LinkObject>();
         Document aDoc =
-                Jsoup.connect("http://www2.uet.vnu.edu.vn/coltech/taxonomy/term/141#main").get();
+                Jsoup.connect(URL).get();
         Elements elements = aDoc.getElementsByClass("views-field-title");
         System.out.println(elements.size());
         for (int i = 0; i < elements.size(); i++){
