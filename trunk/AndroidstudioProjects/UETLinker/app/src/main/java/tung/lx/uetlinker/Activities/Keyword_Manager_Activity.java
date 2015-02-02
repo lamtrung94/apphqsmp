@@ -1,6 +1,8 @@
 package tung.lx.uetlinker.Activities;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,12 +14,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
+import tung.lx.uetlinker.Constants;
 import tung.lx.uetlinker.NavigationDrawerFragment;
 import tung.lx.uetlinker.R;
+import tung.lx.uetlinker.Utils.Utils;
 
 public class Keyword_Manager_Activity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, View.OnClickListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -28,7 +34,8 @@ public class Keyword_Manager_Activity extends ActionBarActivity
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
-
+    private EditText keywordInput;
+    private Button btnOk;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +49,14 @@ public class Keyword_Manager_Activity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        SharedPreferences settings = getSharedPreferences(Constants.PREFS_NAME, 0);
+        String keywordList = settings.getString("keywords", "");
+        keywordInput = (EditText)findViewById(R.id.keywordInput);
+        if(keywordList != null && !"".equals(keywordList)){
+            keywordInput.setText(keywordList);
+        }
+        btnOk = (Button)findViewById(R.id.btnOk);
+        btnOk.setOnClickListener(this);
     }
 
     @Override
@@ -59,10 +74,13 @@ public class Keyword_Manager_Activity extends ActionBarActivity
                 mTitle = getString(R.string.home_section);
                 break;
             case 2:
-                mTitle = getString(R.string.keywords_section);
+                mTitle = getString(R.string.exam_section);
                 break;
             case 3:
-                mTitle = getString(R.string.title_section3);
+                mTitle = getString(R.string.schedule_section);
+                break;
+            case 4:
+                mTitle = getString(R.string.keywords_section);
                 break;
         }
     }
@@ -101,6 +119,20 @@ public class Keyword_Manager_Activity extends ActionBarActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.btnOk:
+                String keywordList = keywordInput.getText().toString();
+                Utils.saveKeywordsPreferences(getApplicationContext(), keywordList);
+                Intent i = new Intent();
+                i.setClass(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+                this.finish();
+                break;
+        }
     }
 
     /**
